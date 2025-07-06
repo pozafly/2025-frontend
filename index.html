@@ -33,6 +33,8 @@
     <style>
       body {
         font-family: 'Noto Sans KR', sans-serif;
+        word-break: keep-all;
+        word-wrap: break-word;
       }
       .content-section {
         display: none;
@@ -151,13 +153,15 @@
   <body class="bg-slate-50 text-slate-800">
     <div class="flex h-screen bg-white">
       <!-- Sidebar Navigation -->
-      <aside class="w-64 flex-shrink-0 bg-white border-r border-slate-200">
+      <aside
+        class="w-64 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col"
+      >
         <div
-          class="h-16 flex items-center justify-center border-b border-slate-200"
+          class="h-16 flex items-center justify-center border-b border-slate-200 flex-shrink-0"
         >
           <h1 class="text-xl font-bold text-teal-700">FE 트렌드 2025</h1>
         </div>
-        <nav class="mt-4">
+        <nav class="flex-1 overflow-y-auto mt-4 pb-4">
           <a
             href="#intro"
             class="nav-link flex items-center py-3 px-4 text-slate-600"
@@ -344,10 +348,12 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-y-auto bg-slate-50">
-        <div class="p-6 md:p-8">
+      <main
+        class="flex-1 overflow-y-auto bg-slate-50 px-10 justify-center flex"
+      >
+        <div class="p-6 md:p-8 max-w-5xl">
           <!-- Section: Intro -->
-          <section id="intro" class="content-section">
+          <section id="intro" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               Intro - 프론트엔드는 여전히 HTML + CSS + JS?
             </h2>
@@ -579,7 +585,7 @@
           </section>
 
           <!-- Section: jQuery Era -->
-          <section id="jquery-era" class="content-section">
+          <section id="jquery-era" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               🗺️ jQuery와 웹 애플리케이션의 태동
             </h2>
@@ -651,7 +657,7 @@ $('#load-data').on('click', function() {
           </section>
 
           <!-- Section: SPA Era -->
-          <section id="spa-era" class="content-section">
+          <section id="spa-era" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               📱 SPA 프레임워크 시대: React, Vue, Angular
             </h2>
@@ -770,7 +776,7 @@ $('#load-data').on('click', function() {
           </section>
 
           <!-- Section: Trend 1 -->
-          <section id="trend1" class="content-section">
+          <section id="trend1" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               트렌드 1: 메타 프레임워크의 시대
             </h2>
@@ -1034,7 +1040,7 @@ $('#load-data').on('click', function() {
           </section>
 
           <!-- Section: Trend 2 -->
-          <section id="trend2" class="content-section">
+          <section id="trend2" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               트렌드 2: DX(개발자 경험) 중심의 툴링 생태계
             </h2>
@@ -1186,7 +1192,7 @@ $('#load-data').on('click', function() {
           </section>
 
           <!-- Section: Trend 3 -->
-          <section id="trend3" class="content-section">
+          <section id="trend3" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               트렌드 3: UI/UX와 상태 관리의 패러다임 변화
             </h2>
@@ -1352,7 +1358,7 @@ $('#load-data').on('click', function() {
           </section>
 
           <!-- Section: Trend 4 -->
-          <section id="trend4" class="content-section">
+          <section id="trend4" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               트렌드 4: 프론트엔드의 풀스택화
             </h2>
@@ -1504,7 +1510,7 @@ $('#load-data').on('click', function() {
           </section>
 
           <!-- Section: Trend 5 -->
-          <section id="trend5" class="content-section">
+          <section id="trend5" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               트렌드 5: 프론트엔드 개발자의 역할 확장
             </h2>
@@ -1624,7 +1630,7 @@ $('#load-data').on('click', function() {
             </div>
           </section>
           <!-- Section: Collaboration -->
-          <section id="collaboration" class="content-section">
+          <section id="collaboration" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               백엔드 개발자를 위한 협업 가이드
             </h2>
@@ -1946,7 +1952,7 @@ $('#load-data').on('click', function() {
           </section>
 
           <!-- Section: Conclusion -->
-          <section id="conclusion" class="content-section">
+          <section id="conclusion" class="content-section pb-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               결론 - 프론트엔드, 함께 만드는 시대
             </h2>
@@ -2209,7 +2215,5 @@ $('#load-data').on('click', function() {
         updateContent(location.hash);
       });
     </script>
-    <!-- Add jQuery for the example code in the timeline -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </body>
 </html>
