@@ -1990,12 +1990,12 @@ $('#load-data').on('click', function() {
 
         function updateContent(hash) {
           let targetHash = hash;
-          // Default to the first evolution timeline if hash is empty or a header-only section
+          // Default to intro section if hash is empty or a header-only section
           if (
             !targetHash ||
             headerOnlySectionIds.includes(targetHash.substring(1))
           ) {
-            targetHash = '#intro-evolution';
+            targetHash = '#intro';
           }
 
           navLinks.forEach(link => {
@@ -2018,53 +2018,83 @@ $('#load-data').on('click', function() {
             }
           }
 
-          // Re-query content sections to catch all sections including those in different containers
-          const allContentSections =
-            document.querySelectorAll('.content-section');
-          let activeSection = null;
-          allContentSections.forEach(section => {
-            const isActive = '#' + section.id === targetHash;
-            if (isActive) {
-              activeSection = section;
+          // Try to find the target element first
+          const targetElement = document.getElementById(targetHash.substring(1));
+          
+          if (targetElement) {
+            // Check if target is a main section (.content-section)
+            if (targetElement.classList.contains('content-section')) {
+              // Hide all sections first
+              const allContentSections = document.querySelectorAll('.content-section');
+              allContentSections.forEach(section => {
+                section.classList.remove('active', 'fade-in');
+              });
+              
+              // Show the target section
+              targetElement.classList.add('active', 'fade-in');
+              
+              // Scroll to top for main sections
+              setTimeout(() => {
+                // Find the main content area and scroll it to top
+                const mainContent = document.querySelector('main.flex-1.overflow-y-auto');
+                if (mainContent) {
+                  mainContent.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                  });
+                } else {
+                  // Fallback to window scroll
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                  });
+                }
+              }, 100);
+              
             } else {
-              section.classList.remove('active', 'fade-in');
-            }
-          });
-
-          // Show the active section
-          if (activeSection) {
-            activeSection.classList.add('active', 'fade-in');
-            // Scroll to the active section or subsection
-            activeSection.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-            });
-          } else {
-            // If it's a subsection (div with id), find its parent section and show it
-            const targetElement = document.getElementById(
-              targetHash.substring(1)
-            );
-            if (targetElement) {
+              // It's a subsection - find its parent section and show it
               const parentSection = targetElement.closest('.content-section');
               if (parentSection) {
+                // Hide all sections first
+                const allContentSections = document.querySelectorAll('.content-section');
+                allContentSections.forEach(section => {
+                  section.classList.remove('active', 'fade-in');
+                });
+                
+                // Show the parent section
                 parentSection.classList.add('active', 'fade-in');
+                
+                // Wait for the parent section to be rendered, then scroll to subsection
+                setTimeout(() => {
+                  // Use scrollIntoView for subsections as fallback
+                  targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                  
+                  // Then adjust with offset
+                  setTimeout(() => {
+                    window.scrollBy({
+                      top: -20,
+                      behavior: 'smooth'
+                    });
+                  }, 300);
+                }, 200);
               }
-              targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              });
             }
           }
 
-          // Chart rendering logic
-          if (targetHash === '#trend3-state-paradigm') {
-            renderStateManagementChart();
-          } else {
-            if (stateChart) {
-              stateChart.destroy();
-              stateChart = null;
+          // Chart rendering logic - check if we need to render charts
+          setTimeout(() => {
+            if (targetHash === '#trend3-state-paradigm' || targetHash === '#trend3') {
+              renderStateManagementChart();
+            } else {
+              if (stateChart) {
+                stateChart.destroy();
+                stateChart = null;
+              }
             }
-          }
+          }, 500); // Increased delay to ensure DOM is ready
 
           // Timeline animation logic
           if (targetHash === '#intro-evolution') {
