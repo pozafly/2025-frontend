@@ -4,7 +4,16 @@
       "Bash(mkdir:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(python3:*)",
+      "Bash(awk:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(open index.html)",
+      "Bash(sed:*)",
+      "Bash(open:*)",
+      "Bash(npm run format:check:*)"
     ],
     "deny": []
   }
