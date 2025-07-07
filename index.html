@@ -7,6 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
@@ -151,6 +155,10 @@
     </style>
   </head>
   <body class="bg-slate-50 text-slate-800">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
     <div class="flex h-screen bg-white">
       <!-- Sidebar Navigation -->
       <aside
@@ -606,19 +614,17 @@
               >입니다. 짧고 직관적인 코드로 AJAX 통신과 DOM 조작을 가능하게 하여
               폭발적인 인기를 끌었습니다.
             </p>
-            <div
-              class="mt-4 bg-slate-800 text-slate-200 rounded-lg p-4 text-sm font-mono overflow-x-auto"
-            >
-              <pre><code><span class="text-gray-400">// HTML: &lt;button id="load-data"&gt;데이터 로드&lt;/button&gt;&lt;div id="results"&gt;&lt;/div&gt;</span>
-<span class="text-green-400">// 버튼 클릭 시, 페이지 새로고침 없이 서버에서 데이터를 비동기로 가져옵니다.</span>
+            <div class="mt-4 rounded-lg text-sm font-mono overflow-x-auto">
+              <pre><code>// HTML: &lt;button id="load-data"&gt;데이터 로드&lt;/button&gt;&lt;div id="results"&gt;&lt;/div&gt;
+// 버튼 클릭 시, 페이지 새로고침 없이 서버에서 데이터를 비동기로 가져옵니다.
 $('#load-data').on('click', function() {
   $.ajax({
-    url: '/api/items', <span class="text-gray-400">// 백엔드 API 엔드포인트</span>
-    success: function(data) { <span class="text-gray-400">// 통신 성공 시</span>
-      <span class="text-green-400">// 기존 내용을 비우고,</span>
+    url: '/api/items', // 백엔드 API 엔드포인트
+    success: function(data) { // 통신 성공 시
+      // 기존 내용을 비우고,
       $('#results').empty();
       
-      <span class="text-green-400">// 받은 데이터로 새로운 HTML 요소를 만들어 DOM에 직접 추가합니다.</span>
+      // 받은 데이터로 새로운 HTML 요소를 만들어 DOM에 직접 추가합니다.
       $.each(data, function(index, item) {
         $('#results').append('&lt;div class="item"&gt;' + item.name + '&lt;/div&gt;');
       });
@@ -696,11 +702,14 @@ $('#load-data').on('click', function() {
               📱 SPA 프레임워크 시대: React, Vue, Angular
             </h2>
             <p class="text-slate-600 mb-8">
-              jQuery 시대가 웹 애플리케이션의 가능성을 보여주었다면, SPA(Single
-              Page Application) 프레임워크의 등장은 본격적인 웹 애플리케이션
-              시대를 열었습니다. 사용자는 더 이상 페이지 이동 시 화면 전체가
-              깜빡이는 것을 보지 않아도 되었고, 마치 데스크톱 앱처럼 부드러운
-              사용자 경험을 누릴 수 있게 되었습니다.
+              jQuery 시대가 웹의 동적인 가능성을 열어주었다면, SPA(Single Page
+              Application) 프레임워크의 등장은 현대적인 웹 애플리케이션의 시대를
+              본격적으로 열었습니다. 사용자는 더 이상 새로운 정보를 볼 때마다
+              페이지 전체가 하얗게 깜빡이며 새로고침되는 것을 경험하지 않아도
+              되었습니다. 대신, 필요한 데이터만 서버와 주고받아 화면의 일부만
+              부드럽게 업데이트하며 마치 데스크톱 애플리케이션과 같은 사용자
+              경험(UX)을 누릴 수 있게 되었죠. 이 혁신의 중심에는 Angular, React,
+              Vue라는 세 거인이 있습니다.
             </p>
 
             <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
@@ -710,16 +719,24 @@ $('#load-data').on('click', function() {
               <div
                 class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg"
               >
-                <span class="text-4xl">🅰️</span>
+                <span class="text-4xl">
+                  <img src="images/angular.png" alt="Angular" width="200px" />
+                </span>
                 <div>
                   <h4 class="font-bold text-lg text-slate-800">
                     AngularJS (2010)
                   </h4>
                   <p class="text-slate-600">
-                    구글에서 개발. HTML을 확장하는 개념(양방향 데이터 바인딩,
-                    디렉티브 등)을 도입하여 구조적인 SPA 개발을 가능하게
-                    했습니다. 프레임워크가 UI 렌더링과 상태 관리를 상당 부분
-                    자동화해주었습니다.
+                    구글에서 개발한 AngularJS는 '프레임워크'라는 이름에 걸맞게
+                    웹 애플리케이션 개발에 필요한 거의 모든 기능(라우팅, 데이터
+                    관리, 템플릿 등)을 갖춘 'All-in-one' 솔루션이었습니다. 특히
+                    <strong>양방향 데이터 바인딩(Two-way Data Binding)</strong
+                    >과 <strong>디렉티브(Directives)</strong>라는 개념은
+                    혁신적이었습니다. 개발자가 DOM을 직접 조작하는 코드 없이,
+                    데이터 모델(Model)의 변경이 즉시 화면(View)에 반영되고,
+                    반대로 사용자 입력으로 인한 화면의 변경이 데이터 모델에
+                    자동으로 반영되게 만들었습니다. 이는 개발 생산성을 극적으로
+                    향상시켰습니다.
                   </p>
                 </div>
               </div>
@@ -727,20 +744,25 @@ $('#load-data').on('click', function() {
                 기술적 흐름: 클라이언트 렌더링의 본격화
               </p>
               <p class="text-slate-600 mt-2">
-                페이지 구성, 상태 관리, 템플릿 렌더링 등 과거 서버의 역할이었던
-                많은 부분이 브라우저(클라이언트)로 넘어오기 시작했습니다.
-                백엔드는 점차 순수한 데이터 API 제공에 집중하게 됩니다.
+                AngularJS의 등장은 웹 개발의 패러다임을 바꾸는 신호탄이었습니다.
+                과거 서버가 담당했던 HTML 생성, 페이지 구성, 상태 관리 등의
+                역할이 대거 브라우저(클라이언트)로 넘어오기 시작했습니다. 이로
+                인해 백엔드는 화면을 고려하지 않고 순수하게 데이터만 제공하는
+                <strong>API 서버(주로 RESTful API)</strong>의 역할에 집중하게
+                되는 '역할의 분리'가 가속화되었습니다.
               </p>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
               <h3 class="text-xl font-bold mb-4 text-slate-800">
-                SPA의 대중화와 React의 등판 (2013 ~ 2016)
+                SPA의 대중화와 React, Vue의 등판 (2013 ~ 2016)
               </h3>
               <div
                 class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg mb-4"
               >
-                <span class="text-4xl">⚛️</span>
+                <span class="text-4xl">
+                  <img src="images/react.png" alt="react" width="92px" />
+                </span>
                 <div>
                   <h4 class="font-bold text-lg text-slate-800">React (2013)</h4>
                   <p class="text-slate-600">
@@ -752,47 +774,86 @@ $('#load-data').on('click', function() {
                     >라는 혁신적인 개념으로 개발자들에게 폭발적인 반응을 얻으며
                     SPA 개발의 표준으로 자리 잡게 됩니다.
                   </p>
+                  <ul class="mt-6 list-disc pl-6">
+                    <li>
+                      선언형 UI: "어떻게" 그릴지(How)가 아닌 "무엇을"
+                      그릴지(What)에 집중하게 하여 코드의 가독성과 예측 가능성을
+                      높였습니다.
+                    </li>
+                    <li>
+                      Virtual DOM: 실제 DOM을 직접 조작하는 대신, 메모리상에
+                      가상의 DOM을 두고 변경 사항을 한 번에 계산(diffing)하여
+                      실제 DOM에는 최소한의 변경만 적용했습니다. 이는 복잡한
+                      애플리케이션에서 놀라운 렌더링 성능을 보여주었습니다.
+                    </li>
+                    <li>
+                      컴포넌트 기반 아키텍처: UI를 독립적인 기능을 가진 레고
+                      블록과 같은 '컴포넌트'로 분리하여 재사용성을 극대화하고,
+                      복잡한 UI를 체계적으로 관리할 수 있게 했습니다.
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <p class="mt-4 text-slate-700 font-semibold">
-                SPA 기술 트렌드의 정착:
-              </p>
-              <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div
-                  class="flex items-center space-x-2 p-3 bg-slate-100 rounded-md"
-                >
-                  <span class="text-2xl">🔄</span>
-                  <div>
-                    <p class="font-semibold">상태 관리</p>
-                    <p class="text-xs text-slate-500">Redux, MobX</p>
-                  </div>
-                </div>
-                <div
-                  class="flex items-center space-x-2 p-3 bg-slate-100 rounded-md"
-                >
-                  <span class="text-2xl">🧭</span>
-                  <div>
-                    <p class="font-semibold">클라이언트 라우팅</p>
-                    <p class="text-xs text-slate-500">React Router</p>
-                  </div>
-                </div>
-                <div
-                  class="flex items-center space-x-2 p-3 bg-slate-100 rounded-md"
-                >
-                  <span class="text-2xl">📦</span>
-                  <div>
-                    <p class="font-semibold">빌드 시스템</p>
-                    <p class="text-xs text-slate-500">Webpack, Babel</p>
-                  </div>
+              <div
+                class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg mb-4"
+              >
+                <span class="text-4xl">
+                  <img src="images/vue.png" alt="vue" width="92px" />
+                </span>
+                <div>
+                  <h4 class="font-bold text-lg text-slate-800">
+                    Vue.js (2014)
+                  </h4>
+                  <p class="text-slate-600">
+                    구글에서 AngularJS 프로젝트에 참여했던 개발자 에반 유(Evan
+                    You)가 발표한 Vue.js는 "두 거인의 장점을 흡수하고 단점을
+                    개선하면 어떨까?"라는 생각에서 출발했습니다. 그는
+                    AngularJS의 쉬운 데이터 바인딩과 React의 반응형 컴포넌트
+                    아키텍처에서 영감을 받아, 이 둘을 결합하여 훨씬 가볍고
+                    배우기 쉬운 프레임워크를 만들었습니다.
+                  </p>
                 </div>
               </div>
-              <p class="text-slate-600 mt-4">
-                React의 등장과 함께, 복잡해진 애플리케이션의 상태를 효율적으로
-                관리하기 위한 상태 관리 라이브러리, 페이지 이동을 처리하는
-                라우팅 라이브러리, 최신 JavaScript 문법 사용과 코드 번들링을
-                위한 빌드 시스템이 SPA 개발의 필수 요소로 자리 잡았습니다.
-              </p>
             </div>
+
+            <p class="mt-4 text-slate-700 font-semibold">
+              SPA 기술 트렌드의 정착:
+            </p>
+            <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div
+                class="flex items-center space-x-2 p-3 bg-slate-100 rounded-md"
+              >
+                <span class="text-2xl">🔄</span>
+                <div>
+                  <p class="font-semibold">상태 관리</p>
+                  <p class="text-xs text-slate-500">Redux, MobX</p>
+                </div>
+              </div>
+              <div
+                class="flex items-center space-x-2 p-3 bg-slate-100 rounded-md"
+              >
+                <span class="text-2xl">🧭</span>
+                <div>
+                  <p class="font-semibold">클라이언트 라우팅</p>
+                  <p class="text-xs text-slate-500">React Router</p>
+                </div>
+              </div>
+              <div
+                class="flex items-center space-x-2 p-3 bg-slate-100 rounded-md"
+              >
+                <span class="text-2xl">📦</span>
+                <div>
+                  <p class="font-semibold">빌드 시스템</p>
+                  <p class="text-xs text-slate-500">Webpack, Babel</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-slate-600 mt-4">
+              React의 등장과 함께, 복잡해진 애플리케이션의 상태를 효율적으로
+              관리하기 위한 상태 관리 라이브러리, 페이지 이동을 처리하는 라우팅
+              라이브러리, 최신 JavaScript 문법 사용과 코드 번들링을 위한 빌드
+              시스템이 SPA 개발의 필수 요소로 자리 잡았습니다.
+            </p>
 
             <p
               class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
@@ -807,6 +868,137 @@ $('#load-data').on('click', function() {
               단점들, 특히 SEO와 초기 로딩 문제는 이후 메타 프레임워크의 등장을
               촉발하는 중요한 계기가 됩니다.
             </p>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-8 mt-12">
+              <h3 class="text-xl font-bold mb-4 text-slate-800">
+                SPA의 핵심 동작 원리: 어떻게 한 페이지로 동작할까?
+              </h3>
+              <p class="text-slate-600 mb-4">
+                SPA는 이름처럼 단 하나의 HTML 페이지로 시작합니다. 그렇다면
+                어떻게 다른 내용을 보여줄 수 있을까요? 그 비밀은 JavaScript에
+                있습니다. 전체 과정을 간단한 코드로 살펴보겠습니다.
+              </p>
+
+              <div class="mb-6">
+                <h4 class="font-semibold text-lg text-slate-700 mb-2">
+                  1. 최초 요청: 서버는 뼈대만 보낸다
+                </h4>
+                <p class="text-slate-600 mb-2">
+                  사용자가 사이트에 처음 접속하면, 서버는 내용이 비어있는
+                  <strong>`index.html`</strong> 파일 하나와, 애플리케이션의 모든
+                  로직이 담긴 <strong>JavaScript 파일(`app.js`)</strong>을
+                  브라우저에 보내줍니다.
+                </p>
+                <pre><code class="language-html bg-gray-800 text-white text-sm rounded-md block p-4 overflow-x-auto">&lt;!DOCTYPE html&gt;
+&lt;html lang=""&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;link rel="icon" href="/favicon.ico"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Vite App&lt;/title&gt;
+    &lt;script type="module" crossorigin src="/assets/app.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" crossorigin href="/assets/index-TXLObeWa.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+              </div>
+
+              <div class="mb-6">
+                <h4 class="font-semibold text-lg text-slate-700 mb-2">
+                  2. 브라우저: JavaScript가 모든 것을 그린다
+                </h4>
+                <p class="text-slate-600 mb-2">
+                  브라우저는 `index.html`과 `app.js`를 받은 후, `app.js`를
+                  실행합니다. 이 스크립트는 비어있던 `&lt;div id="root"&gt;`를
+                  찾아 초기 화면(예: 홈페이지)을 그려 넣습니다. 그리고
+                  `&lt;nav&gt;`의 링크 클릭을 감시하기 시작합니다.
+                </p>
+                <pre><code class="language-javascript text-sm rounded-md block p-4 bg-gray-800 text-white overflow-x-auto">// app.js - 실제 프레임워크는 훨씬 정교하지만, 원리는 동일합니다.
+
+// 1. 콘텐츠를 그려넣을 캔버스를 찾습니다.
+const root = document.getElementById('root');
+
+// 2. 각 경로에 맞는 페이지 내용을 정의합니다. (실제로는 HTML 템플릿)
+const routes = {
+  '/': '&lt;h1&gt;홈페이지에 오신 것을 환영합니다!&lt;/h1&gt;',
+  '/about': '&lt;h1&gt;저희는 멋진 회사입니다.&lt;/h1&gt;&lt;p&gt;데이터 로딩 중...&lt;/p&gt;',
+};
+
+// 3. 브라우저 주소에 따라 적절한 페이지를 그리는 함수
+const render = (path) => {
+  root.innerHTML = routes[path] || '&lt;h1&gt;404 Not Found&lt;/h1&gt;';
+};
+
+// 4. 사용자가 링크를 클릭했을 때의 동작을 정의
+document.addEventListener('click', (e) => {
+  // 클릭된 것이 탐색 링크(&lt;a&gt;)가 맞는지 확인
+  if (e.target.tagName === 'A') {
+    e.preventDefault(); // 중요: 페이지 새로고침을 막습니다!
+    const path = e.target.getAttribute('href');
+    
+    // 주소창의 URL을 프로그래밍 방식으로 변경
+    history.pushState(null, null, path); 
+    
+    // 새로운 경로에 맞는 화면을 다시 그림
+    render(path);
+    
+    // 만약 '/about' 페이지라면 서버에 추가 데이터 요청
+    if (path === '/about') {
+      fetch('/api/company-info') // 서버에 데이터만 요청 (HTML 아님)
+        .then(response => response.json()) // JSON 형태로 파싱
+        .then(data => {
+          // 데이터 로딩이 끝나면 내용 업데이트
+          root.querySelector('p').textContent = data.description;
+        });
+    }
+  }
+});
+
+// 5. 첫 페이지 로딩
+render(window.location.pathname);
+</code></pre>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-lg text-slate-700 mb-2">
+                  정리: SPA의 동작 흐름
+                </h4>
+                <ol class="list-decimal list-inside text-slate-600 space-y-2">
+                  <li>
+                    <strong>최초 로드:</strong> 브라우저는 서버로부터 뼈대
+                    `index.html`과 두뇌 `app.js`를 받습니다.
+                  </li>
+                  <li>
+                    <strong>초기 렌더링:</strong> `app.js`가 실행되어 `&lt;div
+                    id="root"&gt;` 안에 초기 페이지를 그립니다.
+                  </li>
+                  <li>
+                    <strong>내부 이동:</strong> 사용자가 링크를 클릭하면,
+                    `app.js`가 페이지 새로고침을 막고, 주소창의 주소만 바꿉니다.
+                  </li>
+                  <li>
+                    <strong>동적 렌더링 & 데이터 요청:</strong> `app.js`는
+                    새로운 주소에 맞는 화면을 `&lt;div id="root"&gt;`에 다시
+                    그리고, 필요하다면 서버에
+                    <strong>데이터(JSON)만</strong> 요청하여 화면의 일부를
+                    업데이트합니다.
+                  </li>
+                </ol>
+                <p class="text-slate-600 mt-4">
+                  이처럼 SPA는 최초에 한 번만 페이지 전체를 받고, 이후에는
+                  JavaScript가 서버와는 데이터로만 통신하며 화면을 동적으로 계속
+                  바꿔나가는 방식입니다. React, Vue, Angular와 같은 프레임워크는
+                  바로 이
+                  <strong
+                    >DOM 조작과 상태 관리, 데이터 요청 과정을 훨씬 더 효율적이고
+                    체계적으로 자동화</strong
+                  >해주는 강력한 도구인 셈입니다.
+                </p>
+              </div>
+            </div>
           </section>
 
           <!-- Section: Trend 1 -->
@@ -834,7 +1026,13 @@ $('#load-data').on('click', function() {
                 <div
                   class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">➡️</span>
+                  <span class="text-4xl text-teal-600">
+                    <img
+                      class="rounded-full"
+                      src="images/nextjs.jpeg"
+                      alt="nextjs"
+                    />
+                  </span>
                   <div>
                     <h4 class="text-xl font-bold mb-2 text-slate-800">
                       Next.js
@@ -850,7 +1048,13 @@ $('#load-data').on('click', function() {
                 <div
                   class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">🔄</span>
+                  <span class="text-4xl text-teal-600">
+                    <img
+                      src="images/remix.png"
+                      alt="remix"
+                      class="rounded-full"
+                    />
+                  </span>
                   <div>
                     <h4 class="text-xl font-bold mb-2 text-slate-800">Remix</h4>
                     <p class="text-slate-600">
@@ -864,7 +1068,14 @@ $('#load-data').on('click', function() {
                 <div
                   class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">🌠</span>
+                  <span class="text-4xl text-teal-600">
+                    <img
+                      src="images/astro.jpg"
+                      alt="astro"
+                      class="rounded-full"
+                      width="240px"
+                    />
+                  </span>
                   <div>
                     <h4 class="text-xl font-bold mb-2 text-slate-800">Astro</h4>
                     <p class="text-slate-600">
@@ -879,14 +1090,23 @@ $('#load-data').on('click', function() {
                 <div
                   class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">⚡️</span>
+                  <span class="text-4xl text-teal-600">
+                    <img
+                      src="images/gatsby.png"
+                      alt="gatsby"
+                      class="rounded-full"
+                    />
+                  </span>
                   <div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-800">Qwik</h4>
+                    <h4 class="text-xl font-bold mb-2 text-slate-800">
+                      Gatsby
+                    </h4>
                     <p class="text-slate-600">
-                      "Resumability" 개념을 통해 JavaScript 코드를 거의
-                      다운로드하지 않고도 상호작용이 가능한 웹사이트를 구축할 수
-                      있도록 합니다. 이는 Hydration 과정을 생략하여 매우 빠른
-                      TTI(Time To Interactive)를 달성합니다.
+                      React 기반의 강력한 정적 사이트 생성기(SSG)입니다.
+                      GraphQL을 활용한 통합 데이터 레이어를 통해 CMS, Markdown,
+                      API 등 다양한 소스에서 데이터를 쉽게 가져와 빌드 시점에
+                      페이지를 생성하므로 매우 빠른 로딩 속도를 보장합니다.
+                      블로그, 포트폴리오, 문서 사이트에 최적화되어 있습니다.
                     </p>
                   </div>
                 </div>
@@ -964,14 +1184,15 @@ $('#load-data').on('click', function() {
             <!-- Sub-Section: Trend 1 - Rendering Optimization -->
             <div id="trend1-optimization">
               <h3 class="text-xl font-bold mb-4 text-slate-800">
-                렌더링 최적화의 진화: Hydration을 넘어 Resumability로
+                렌더링 최적화의 진화: Hydration을 넘어 서버 컴포넌트로
               </h3>
               <p class="text-slate-600 mb-8">
                 서버에서 렌더링된 정적 HTML에 어떻게 생명을 불어넣어
                 인터랙티브하게 만들 것인가? 이 질문에 대한 해답은
-                'Hydration'에서 시작하여 'Resumability'라는 새로운 패러다임으로
-                진화하고 있습니다. 이 과정의 핵심 목표는 초기 JavaScript 실행
-                비용을 최소화하여 사용자 경험을 극대화하는 것입니다.
+                'Hydration'에서 시작하여, 이제는 '어떤 컴포넌트의 JavaScript를
+                보낼 것인가'를 근본적으로 다시 생각하는 패러다임으로 진화하고
+                있습니다. 이 과정의 핵심 목표는 초기 JavaScript 실행 비용을
+                최소화하여 사용자 경험을 극대화하는 것입니다.
               </p>
               <div class="bg-white p-6 rounded-lg shadow-sm space-y-6">
                 <div>
@@ -1034,25 +1255,47 @@ $('#load-data').on('click', function() {
                 </div>
                 <div class="border-t pt-6 border-slate-200">
                   <h4 class="text-lg font-bold text-slate-800">
-                    4단계: Resumability (재개 가능성)
+                    4단계: 서버 컴포넌트 (Server Components)
                   </h4>
                   <p class="text-slate-600 mt-2">
-                    Hydration의 근본적인 문제, 즉 '서버에서 했던 작업을
-                    클라이언트에서 반복하는 것'을 해결하려는 새로운
-                    패러다임입니다.
-                    <strong class="text-teal-600">Qwik</strong> 프레임워크가
-                    주창하는 개념으로, 서버에서 애플리케이션의 실행 상태와
-                    필요한 모든 정보를 HTML에 직렬화하여 저장합니다.
-                    클라이언트는 이 정보를 바탕으로 JavaScript를
-                    재실행(Hydration)하는 대신, 마치 일시정지된 게임을
-                    '재개(Resume)'하듯이 필요한 시점에 필요한 코드만 즉시
-                    실행합니다.
+                    "애초에 상호작용이 필요 없는 컴포넌트의 JavaScript는 왜
+                    클라이언트로 보내야 하는가?"라는 근본적인 질문에서
+                    출발합니다.
+                    <strong class="text-teal-600">React(Next.js)</strong>가
+                    주도하는 이 패러다임은 컴포넌트를 두 종류로 나눕니다.
                   </p>
+                  <ul
+                    class="list-disc list-inside text-slate-600 mt-2 space-y-1"
+                  >
+                    <li>
+                      <strong>서버 컴포넌트:</strong> 서버에서만 렌더링되고, 그
+                      결과물(HTML과 유사한 특수 포맷)만 클라이언트로 전송됩니다.
+                      JavaScript 코드는 전혀 전송되지 않습니다. 데이터베이스
+                      조회, 파일 시스템 접근 등 서버의 모든 능력을 활용할 수
+                      있습니다.
+                    </li>
+                    <li>
+                      <strong>클라이언트 컴포넌트:</strong> 기존의 방식처럼
+                      클라이언트에서 Hydration되고 상호작용을 담당합니다. (예:
+                      `onClick`, `useState` 사용)
+                    </li>
+                  </ul>
                   <p class="text-sm mt-2 text-blue-600">
-                    <strong>궁극적 목표:</strong> 초기 JavaScript 실행을 '0'에
-                    가깝게 만들어 거의 즉각적인 TTI를 달성하는 것입니다. 이는 웹
-                    성능의 새로운 지평을 열 수 있는 혁신적인 접근 방식입니다.
+                    <strong>핵심 아이디어:</strong> 기본적으로 모든 컴포넌트를
+                    '제로-자바스크립트' 서버 컴포넌트로 만들고, 상호작용이 꼭
+                    필요한 부분만 클라이언트 컴포넌트로 명시하여, 클라이언트에
+                    전송되는 JS 양을 최소화합니다.
                   </p>
+                  <div class="mt-6 flex flex-col items-center">
+                    <img
+                      src="images/sql_injection_sc.webp"
+                      alt="sql_injection_sc"
+                      class="border border-slate-200 rounded-lg"
+                    />
+                    <span class="text-sm text-slate-500 mt-2"
+                      >뇌절의 SQL 인젝션</span
+                    >
+                  </div>
                 </div>
                 <p
                   class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
@@ -1061,13 +1304,13 @@ $('#load-data').on('click', function() {
                     >백엔드 개발자에게 주는 시사점:</strong
                   >
                   이러한 렌더링 최적화는 프론트엔드만의 이슈가 아닙니다.
-                  Islands나 Resumability 아키텍처는 서버에서 더 많은 정보를
-                  처리하고 정교하게 구조화된 HTML을 생성해야 합니다. 이는
-                  프론트엔드와 백엔드(혹은 프론트엔드 서버) 간의 데이터 통신
-                  방식과 API 설계에 영향을 미칩니다. 예를 들어, 컴포넌트별로
-                  독립적으로 데이터를 요청할 수 있도록 API를 세분화하거나, 초기
-                  HTML에 필요한 데이터를 포함시키는 전략 등을 함께 고민해야
-                  합니다.
+                  <strong>서버 컴포넌트</strong>나 Islands 아키텍처는 서버에서
+                  더 많은 정보를 처리하고 정교하게 구조화된 HTML(또는 스트리밍
+                  데이터)을 생성해야 합니다. 이는 프론트엔드와 백엔드(혹은
+                  프론트엔드 서버) 간의 데이터 통신 방식과 API 설계에 영향을
+                  미칩니다. 예를 들어, 서버 컴포넌트가 직접 데이터베이스에
+                  접근하거나, 컴포넌트별로 독립적으로 데이터를 요청할 수 있도록
+                  API를 세분화하는 전략 등을 함께 고민해야 합니다.
                 </p>
               </div>
             </div>
