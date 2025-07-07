@@ -5,6 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2025 프론트엔드 트렌드</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              border: 'hsl(var(--border))',
+              input: 'hsl(var(--input))',
+              ring: 'hsl(var(--ring))',
+              background: 'hsl(var(--background))',
+              foreground: 'hsl(var(--foreground))',
+              primary: {
+                DEFAULT: 'hsl(var(--primary))',
+                foreground: 'hsl(var(--primary-foreground))',
+              },
+              secondary: {
+                DEFAULT: 'hsl(var(--secondary))',
+                foreground: 'hsl(var(--secondary-foreground))',
+              },
+              destructive: {
+                DEFAULT: 'hsl(var(--destructive))',
+                foreground: 'hsl(var(--destructive-foreground))',
+              },
+              muted: {
+                DEFAULT: 'hsl(var(--muted))',
+                foreground: 'hsl(var(--muted-foreground))',
+              },
+              accent: {
+                DEFAULT: 'hsl(var(--accent))',
+                foreground: 'hsl(var(--accent-foreground))',
+              },
+              popover: {
+                DEFAULT: 'hsl(var(--popover))',
+                foreground: 'hsl(var(--popover-foreground))',
+              },
+              card: {
+                DEFAULT: 'hsl(var(--card))',
+                foreground: 'hsl(var(--card-foreground))',
+              },
+            },
+            borderRadius: {
+              lg: 'var(--radius)',
+              md: 'calc(var(--radius) - 2px)',
+              sm: 'calc(var(--radius) - 4px)',
+            },
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+            },
+          },
+        },
+      };
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -13,7 +65,7 @@
     />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <!-- Chosen Palette: Calm Tech -->
@@ -35,54 +87,234 @@
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
+        --primary: 222.2 47.4% 11.2%;
+        --primary-foreground: 210 40% 98%;
+        --secondary: 210 40% 96%;
+        --secondary-foreground: 222.2 47.4% 11.2%;
+        --muted: 210 40% 96%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+        --accent: 210 40% 96%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --ring: 222.2 84% 4.9%;
+        --radius: 0.5rem;
+      }
+
+      .dark {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+        --popover: 222.2 84% 4.9%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 210 40% 98%;
+        --primary-foreground: 222.2 47.4% 11.2%;
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 212.7 26.8% 83.9%;
+      }
+
+      * {
+        border-color: hsl(var(--border));
+      }
+
       body {
-        font-family: 'Noto Sans KR', sans-serif;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-family: 'Inter', ui-sans-serif, system-ui;
+        font-feature-settings:
+          'rlig' 1,
+          'calt' 1;
         word-break: keep-all;
         word-wrap: break-word;
+        line-height: 1.5;
       }
+
       .content-section {
         display: none;
       }
       .content-section.active {
         display: block;
+        animation: fadeIn 0.3s ease-in-out;
       }
+
+      /* Navigation Styles */
       .nav-link {
         transition: all 0.2s ease-in-out;
         border-left: 3px solid transparent;
+        border-radius: 0.375rem;
+        margin: 0.125rem 0.5rem;
+        padding: 0.5rem 0.75rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: hsl(var(--muted-foreground));
       }
       .nav-link.active {
-        border-left-color: #0d9488; /* teal-600 */
-        background-color: #f0fdfa; /* teal-50 */
-        color: #0d9488; /* teal-600 */
-        font-weight: 700;
+        border-left-color: hsl(var(--primary));
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+        font-weight: 600;
       }
       .nav-link:hover {
-        background-color: #f0fdfa; /* teal-50 */
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
       }
       .nav-sub-link {
         transition: all 0.2s ease-in-out;
-        padding-left: 3.5rem; /* Indent for sub-links */
+        padding-left: 3.5rem;
         border-left: 3px solid transparent;
+        border-radius: 0.375rem;
+        margin: 0.125rem 0.5rem;
+        padding: 0.375rem 0.75rem;
+        font-weight: 400;
+        font-size: 0.8125rem;
+        color: hsl(var(--muted-foreground));
       }
       .nav-sub-link.active {
-        border-left-color: #0d9488; /* teal-600 */
-        background-color: #f0fdfa; /* teal-50 */
-        color: #0d9488; /* teal-600 */
-        font-weight: 700;
+        border-left-color: hsl(var(--primary));
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+        font-weight: 500;
       }
       .nav-sub-link:hover {
-        background-color: #f0fdfa; /* teal-50 */
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
       }
+
+      /* Card Styles */
+      .card {
+        background-color: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: calc(var(--radius) + 2px);
+        box-shadow:
+          0 1px 3px 0 rgb(0 0 0 / 0.1),
+          0 1px 2px -1px rgb(0 0 0 / 0.1);
+        padding: 1.5rem;
+        transition: all 0.2s ease-in-out;
+      }
+      .card:hover {
+        box-shadow:
+          0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+      .card-header {
+        padding: 1.5rem 1.5rem 0;
+      }
+      .card-content {
+        padding: 1.5rem;
+      }
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: hsl(var(--card-foreground));
+      }
+      .card-description {
+        color: hsl(var(--muted-foreground));
+        line-height: 1.5;
+      }
+
+      /* Button Styles */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: calc(var(--radius) - 2px);
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+        padding: 0.5rem 1rem;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+      .btn:focus-visible {
+        outline: none;
+        ring: 2px;
+        ring-color: hsl(var(--ring));
+        ring-offset: 2px;
+      }
+      .btn:disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .btn-primary {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+      }
+      .btn-primary:hover {
+        background-color: hsl(var(--primary) / 0.9);
+      }
+      .btn-secondary {
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+      }
+      .btn-secondary:hover {
+        background-color: hsl(var(--secondary) / 0.8);
+      }
+      .btn-outline {
+        border: 1px solid hsl(var(--border));
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+      }
+      .btn-outline:hover {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+      }
+
+      /* Badge Styles */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: calc(var(--radius) - 2px);
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+        border: 1px solid transparent;
+      }
+      .badge-default {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+      }
+      .badge-secondary {
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+      }
+      .badge-outline {
+        border: 1px solid hsl(var(--border));
+        color: hsl(var(--foreground));
+      }
+
       /* Section spacing for better visual separation */
       .content-section > div[id] {
-        margin-top: 3rem; /* 48px */
-        padding-top: 2rem; /* 32px */
-        border-top: 1px solid #e2e8f0; /* slate-200 */
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid hsl(var(--border));
       }
       .content-section > div[id]:first-of-type {
-        margin-top: 2rem; /* 32px for first subsection */
+        margin-top: 2rem;
         border-top: none;
       }
+
+      /* Chart Container */
       .chart-container {
         position: relative;
         width: 100%;
@@ -91,17 +323,23 @@
         margin-right: auto;
         height: 320px;
         max-height: 400px;
+        background-color: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: calc(var(--radius) + 2px);
+        padding: 1rem;
       }
       @media (min-width: 768px) {
         .chart-container {
           height: 350px;
         }
       }
+
+      /* Timeline Styles */
       .timeline-item {
         position: relative;
         padding-bottom: 2rem;
         padding-left: 2.5rem;
-        border-left: 2px solid #e2e8f0; /* slate-200 */
+        border-left: 2px solid hsl(var(--border));
       }
       .timeline-dot {
         position: absolute;
@@ -111,15 +349,17 @@
         width: 1.125rem;
         border-radius: 9999px;
         border-width: 2px;
-        border-color: #ffffff;
-        background-color: #94a3b8; /* slate-400 */
+        border-color: hsl(var(--background));
+        background-color: hsl(var(--muted-foreground));
       }
       .timeline-item.active .timeline-dot {
-        background-color: #0d9488; /* teal-600 */
+        background-color: hsl(var(--primary));
       }
       .timeline-item.active .timeline-title {
-        color: #0f766e; /* teal-700 */
+        color: hsl(var(--primary));
       }
+
+      /* Animations */
       .fade-in {
         animation: fadeIn 0.5s ease-in-out;
       }
@@ -133,12 +373,14 @@
           transform: translateY(0);
         }
       }
+
+      /* Diagram Arrow */
       .diagram-arrow {
         position: relative;
         display: inline-block;
         width: 30px;
         height: 2px;
-        background-color: #64748b; /* slate-500 */
+        background-color: hsl(var(--muted-foreground));
         margin: 0 5px;
       }
       .diagram-arrow::after {
@@ -150,206 +392,200 @@
         height: 0;
         border-top: 5px solid transparent;
         border-bottom: 5px solid transparent;
-        border-left: 8px solid #64748b; /* slate-500 */
+        border-left: 8px solid hsl(var(--muted-foreground));
+      }
+
+      /* Dark mode toggle */
+      .dark-mode-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 50;
+        background-color: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: calc(var(--radius) + 2px);
+        padding: 0.5rem;
+        box-shadow:
+          0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      .dark-mode-toggle:hover {
+        box-shadow:
+          0 10px 15px -3px rgb(0 0 0 / 0.1),
+          0 4px 6px -4px rgb(0 0 0 / 0.1);
       }
     </style>
   </head>
-  <body class="bg-slate-50 text-slate-800">
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle btn btn-outline" onclick="toggleDarkMode()">
+      <span class="dark-mode-icon">🌙</span>
+    </button>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
       hljs.highlightAll();
     </script>
-    <div class="flex h-screen bg-white">
+    <div class="flex h-screen">
       <!-- Sidebar Navigation -->
       <aside
-        class="w-64 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col"
+        class="w-64 flex-shrink-0 card border-r border-border flex flex-col"
       >
         <div
-          class="h-16 flex items-center justify-center border-b border-slate-200 flex-shrink-0"
+          class="h-16 flex items-center justify-center border-b border-border flex-shrink-0"
         >
-          <h1 class="text-xl font-bold text-teal-700">FE 트렌드 2025</h1>
+          <h1 class="text-xl font-bold text-primary">FE 트렌드 2025</h1>
         </div>
         <nav class="flex-1 overflow-y-auto mt-4 pb-4">
           <a
             href="#intro"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
+            class="nav-link flex items-center py-3 px-4"
           >
             <span class="mr-3">👋</span> 개요
           </a>
           <a
             href="#intro-evolution"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> FE 진화 타임라인
           </a>
           <a
             href="#intro-misconceptions"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 오해와 현실
           </a>
           <a
             href="#intro-complexity"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 복잡성 증가 배경
           </a>
 
           <a
             href="#jquery-era"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
+            class="nav-link flex items-center py-3 px-4"
           >
             <span class="mr-3">🗺️</span> jQuery와 웹앱의 태동
           </a>
 
           <a
             href="#spa-era"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
+            class="nav-link flex items-center py-3 px-4"
           >
             <span class="mr-3">📱</span> SPA 프레임워크 시대
           </a>
 
           <a
             href="#trend1"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
+            class="nav-link flex items-center py-3 px-4"
           >
             <span class="mr-3">🚀</span> 트렌드 1: 메타 프레임워크
           </a>
           <a
             href="#trend1-meta"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 메타 프레임워크란?
           </a>
           <a
             href="#trend1-server-client"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> Server/Client Components
           </a>
           <a
             href="#trend1-optimization"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 렌더링 최적화
           </a>
 
           <a
             href="#trend2"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
+            class="nav-link flex items-center py-3 px-4"
           >
             <span class="mr-3">🛠️</span> 트렌드 2: DX 중심 툴링
           </a>
-          <a
-            href="#trend2-build"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
-          >
+          <a href="#trend2-build" class="nav-sub-link flex items-center py-2">
             <span class="mr-2">➡️</span> 빌드 도구 진화
           </a>
-          <a
-            href="#trend2-test"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
-          >
+          <a href="#trend2-test" class="nav-sub-link flex items-center py-2">
             <span class="mr-2">➡️</span> 테스트 생태계
           </a>
-          <a
-            href="#trend2-ai"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
-          >
+          <a href="#trend2-ai" class="nav-sub-link flex items-center py-2">
             <span class="mr-2">➡️</span> AI 보조 도구
           </a>
 
-          <a
-            href="#trend3"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
-          >
+          <a href="#trend3" class="nav-link flex items-center py-3 px-4">
             <span class="mr-3">🎨</span> 트렌드 3: UI/UX & 상태 관리
           </a>
           <a
             href="#trend3-state-paradigm"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 상태 관리 패러다임
           </a>
           <a
             href="#trend3-state-libs"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 주요 상태 관리 라이브러리
           </a>
           <a
             href="#trend3-design-collab"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 디자이너 협업 강화
           </a>
 
-          <a
-            href="#trend4"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
-          >
+          <a href="#trend4" class="nav-link flex items-center py-3 px-4">
             <span class="mr-3">🔗</span> 트렌드 4: 풀스택화
           </a>
           <a
             href="#trend4-fullstack-tech"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 풀스택 기술
           </a>
           <a
             href="#trend4-cloud-integration"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 클라우드 통합
           </a>
 
-          <a
-            href="#trend5"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
-          >
+          <a href="#trend5" class="nav-link flex items-center py-3 px-4">
             <span class="mr-3">🧑‍🚀</span> 트렌드 5: 역할 확장
           </a>
           <a
             href="#trend5-roles-detail"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 역할 확장 상세
           </a>
 
-          <a
-            href="#collaboration"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
-          >
+          <a href="#collaboration" class="nav-link flex items-center py-3 px-4">
             <span class="mr-3">🤝</span> 백엔드 협업 가이드
           </a>
           <a
             href="#collaboration-overview"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
+            class="nav-sub-link flex items-center py-2"
           >
             <span class="mr-2">➡️</span> 협업 개요
           </a>
-          <a
-            href="#collaboration1"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
-          >
+          <a href="#collaboration1" class="nav-sub-link flex items-center py-2">
             <span class="mr-2">➡️</span> API 명세와 타입 공유
           </a>
-          <a
-            href="#collaboration2"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
-          >
+          <a href="#collaboration2" class="nav-sub-link flex items-center py-2">
             <span class="mr-2">➡️</span> 통신 구조 모던화
           </a>
-          <a
-            href="#collaboration3"
-            class="nav-sub-link flex items-center py-2 text-slate-500"
-          >
+          <a href="#collaboration3" class="nav-sub-link flex items-center py-2">
             <span class="mr-2">➡️</span> 성능 최적화 기법 이해
           </a>
-          <a
-            href="#conclusion"
-            class="nav-link flex items-center py-3 px-4 text-slate-600"
-          >
+          <a href="#conclusion" class="nav-link flex items-center py-3 px-4">
             <span class="mr-3">🎯</span> 결론
           </a>
         </nav>
@@ -357,46 +593,46 @@
 
       <!-- Main Content -->
       <main
-        class="flex-1 overflow-y-auto bg-slate-50 px-10 justify-center flex"
+        class="flex-1 overflow-y-auto bg-background px-10 justify-center flex"
       >
         <div class="p-6 md:p-8 max-w-5xl">
           <!-- Section: Intro -->
           <section id="intro" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               Intro - 프론트엔드는 여전히 HTML + CSS + JS?
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               프론트엔드 개발의 진화와 현재 마주한 복잡성에 대한 개요입니다.
             </p>
 
             <!-- Sub-Section: Intro - Evolution Timeline -->
             <div id="intro-evolution">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 FE 개발의 진화 타임라인
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 프론트엔드 기술은 웹의 발전과 함께 끊임없이 진화해왔습니다. 각
                 시대별 주요 특징을 통해 현재의 복잡성을 이해할 수 있습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+              <div class="card mb-8">
                 <div id="timeline-container">
                   <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <h4
-                      class="timeline-title text-lg font-semibold text-slate-600"
+                      class="timeline-title text-lg font-semibold text-muted-foreground"
                     >
                       jQuery 시대 (~2010년대 초반)
                     </h4>
-                    <p class="text-sm text-slate-500">
+                    <p class="text-sm text-muted-foreground">
                       AJAX와 동적 UI의 대중화
                     </p>
-                    <p class="mt-2 text-slate-600">
+                    <p class="mt-2 text-muted-foreground">
                       페이지 새로고침 없이 서버와 통신하는 AJAX 기술이
                       대중화되며, 웹이 정적인 문서를 넘어 동적인
                       애플리케이션으로 발전하는 기반을 마련했습니다.
                       <a
                         href="#jquery-era"
-                        class="text-teal-600 hover:underline font-semibold"
+                        class="text-primary hover:underline font-semibold"
                         onclick="document.querySelector('a[href=\'#jquery-era\']').click(); return false;"
                         >자세히 알아보기 &rarr;</a
                       >
@@ -405,21 +641,21 @@
                   <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <h4
-                      class="timeline-title text-lg font-semibold text-slate-600"
+                      class="timeline-title text-lg font-semibold text-muted-foreground"
                     >
                       SPA 프레임워크 시대 (2010년대 중반~)
                     </h4>
-                    <p class="text-sm text-slate-500">
+                    <p class="text-sm text-muted-foreground">
                       React, Vue, Angular의 등장
                     </p>
-                    <p class="mt-2 text-slate-600">
+                    <p class="mt-2 text-muted-foreground">
                       클라이언트 사이드 렌더링(CSR) 기반의 SPA(Single Page
                       Application)가 대세가 되었습니다. 프론트엔드는 복잡한 UI와
                       상태 관리를 직접 담당하며 '애플리케이션'의 면모를 갖추게
                       됩니다.
                       <a
                         href="#spa-era"
-                        class="text-teal-600 hover:underline font-semibold"
+                        class="text-primary hover:underline font-semibold"
                         onclick="document.querySelector('a[href=\'#spa-era\']').click(); return false;"
                         >자세히 알아보기 &rarr;</a
                       >
@@ -428,14 +664,14 @@
                   <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <h4
-                      class="timeline-title text-lg font-semibold text-slate-600"
+                      class="timeline-title text-lg font-semibold text-muted-foreground"
                     >
                       메타 프레임워크 시대 (2020년대~)
                     </h4>
-                    <p class="text-sm text-slate-500">
+                    <p class="text-sm text-muted-foreground">
                       Next.js, Nuxt.js, Remix 등
                     </p>
-                    <p class="mt-2 text-slate-600">
+                    <p class="mt-2 text-muted-foreground">
                       SPA의 단점을 보완하고 SEO, 초기 로딩 속도, 사용자 경험(UX)
                       개선을 위해 SSR, SSG 등 다양한 렌더링 전략이 도입된
                       프레임워크들이 등장했습니다. 프론트엔드 개발이
@@ -449,21 +685,21 @@
 
             <!-- Sub-Section: Intro - Misconceptions -->
             <div id="intro-misconceptions">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 프론트엔드에 대한 일반적인 오해와 현실
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 "프론트엔드는 그냥 화면 그리는 거 아니야?"라는 오해는 과거의
                 프론트엔드에 대한 시각입니다. 지금의 프론트엔드는 훨씬 더
                 복잡하고 전략적인 역할을 수행합니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+              <div class="card mb-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div class="border-r-0 md:border-r md:pr-8 border-slate-200">
-                    <h4 class="text-xl font-bold text-slate-500 mb-4">
+                  <div class="border-r-0 md:border-r md:pr-8 border-border">
+                    <h4 class="text-xl font-bold text-muted-foreground mb-4">
                       🤔 과거의 오해
                     </h4>
-                    <ul class="space-y-4 text-slate-600">
+                    <ul class="space-y-4 text-muted-foreground">
                       <li class="flex items-start">
                         <span class="mr-3 text-lg">🎨</span>
                         <div>
@@ -499,10 +735,10 @@
                     </ul>
                   </div>
                   <div>
-                    <h4 class="text-xl font-bold text-teal-600 mb-4">
+                    <h4 class="text-xl font-bold text-primary mb-4">
                       🚀 현재의 현실
                     </h4>
-                    <ul class="space-y-4 text-slate-800">
+                    <ul class="space-y-4 text-foreground">
                       <li class="flex items-start">
                         <span class="mr-3 text-lg">🧑‍🎨</span>
                         <div>
@@ -545,7 +781,7 @@
                   </div>
                 </div>
                 <p
-                  class="mt-8 text-center text-slate-700 p-4 bg-slate-50 rounded-lg"
+                  class="mt-8 text-center text-slate-700 p-4 bg-slate-50 rounded-md"
                 >
                   결론적으로, 현대의 프론트엔드 개발자는 제품의 가장 중요한
                   사용자 접점을 책임지는 <strong>'제품 아키텍트'</strong>이자
@@ -556,15 +792,15 @@
 
             <!-- Sub-Section: Intro - Complexity Background -->
             <div id="intro-complexity">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 "요즘 프론트 개발자 뭐가 이렇게 많냐"는 말의 배경
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 프론트엔드 개발의 복잡성이 급증하면서, 학습해야 할 기술 스택과
                 담당해야 할 역할이 크게 늘어났습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+              <div class="card p-6 rounded-md ">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
                     <strong>복잡성 증가:</strong> 사용자 요구사항 증대, 다양한
                     디바이스 및 플랫폼(웹, 모바일 웹, 데스크톱 앱 등) 지원,
@@ -594,14 +830,14 @@
 
           <!-- Section: jQuery Era -->
           <section id="jquery-era" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               🗺️ jQuery와 웹 애플리케이션의 태동
             </h2>
 
-            <h3 class="text-xl font-bold mb-4 text-slate-800 mt-12">
+            <h3 class="text-xl font-bold mb-4 text-foreground mt-12">
               jQuery: AJAX와 DOM 조작의 간소화
             </h3>
-            <p class="text-slate-600 mb-4">
+            <p class="text-muted-foreground mb-4">
               이러한 AJAX 기반의 동적 UI 구현을 매우 쉽게 만들어준 라이브러리가
               바로
               <strong
@@ -614,7 +850,7 @@
               >입니다. 짧고 직관적인 코드로 AJAX 통신과 DOM 조작을 가능하게 하여
               폭발적인 인기를 끌었습니다.
             </p>
-            <div class="mt-4 rounded-lg text-sm font-mono overflow-x-auto">
+            <div class="mt-4 rounded-md text-sm font-mono overflow-x-auto">
               <pre><code>// HTML: &lt;button id="load-data"&gt;데이터 로드&lt;/button&gt;&lt;div id="results"&gt;&lt;/div&gt;
 // 버튼 클릭 시, 페이지 새로고침 없이 서버에서 데이터를 비동기로 가져옵니다.
 $('#load-data').on('click', function() {
@@ -632,7 +868,7 @@ $('#load-data').on('click', function() {
   });
 });</code></pre>
             </div>
-            <p class="text-slate-600 mt-4">
+            <p class="text-muted-foreground mt-4">
               특히 당시 시장 점유율이 높았던 Internet Explorer의 비표준 구현에도
               잘 대응하여, 수많은 기업 웹사이트와 포털, 정부 시스템까지도
               jQuery를 채택하게 되었습니다.
@@ -640,30 +876,30 @@ $('#load-data').on('click', function() {
             <div class="flex justify-center">
               <img
                 src="/images/cross_browsing.jpg"
-                class="border border-slate-200 rounded-lg"
+                class="border border-border rounded-md"
                 width="520px"
               />
             </div>
-            <p class="text-slate-600 mt-4">
+            <p class="text-muted-foreground mt-4">
               그 결과, jQuery는 곧 웹 프론트엔드의
               <strong>사실상 표준 라이브러리</strong>로 자리잡게 되었고, 이후의
               웹 개발 생태계에도 큰 영향을 미쳤습니다.
             </p>
-            <h3 class="text-xl font-bold mb-4 text-slate-800 mt-12">
+            <h3 class="text-xl font-bold mb-4 text-foreground mt-12">
               새로고침 없는 지도: 웹 애플리케이션의 시작
             </h3>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               2005년 구글맵의 등장은 웹 개발 패러다임에 큰 충격을 주었습니다.
               페이지 전체를 새로고침하지 않고도 지도를 부드럽게 이동하고,
               확대/축소하며, 마커를 표시하는 경험은 당시로서는 혁신적이었습니다.
               이 경험의 핵심 기술이 바로
               <strong>AJAX(Asynchronous JavaScript and XML)</strong>였습니다.
             </p>
-            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+            <div class="card mb-8">
               <img
                 src="images/google_map2.gif"
                 alt="초기 구글맵 UI"
-                class="w-full h-auto rounded-lg mb-6 shadow-md"
+                class="w-full h-auto rounded-md mb-6 shadow-md"
               />
               <div class="text-center mb-8">
                 더 많은 정보를 얻고 싶다면
@@ -675,7 +911,7 @@ $('#load-data').on('click', function() {
                 >
                 클릭
               </div>
-              <p class="text-slate-600 mb-4">
+              <p class="text-muted-foreground mb-4">
                 구글맵은 Canvas나 WebGL 같은 현대 그래픽 기술이 아닌,
                 <strong
                   >전통적인 DOM 요소(수많은 작은 지도 이미지 조각)와
@@ -684,7 +920,7 @@ $('#load-data').on('click', function() {
                 이미지 타일을 백그라운드에서 비동기적으로(AJAX) 서버에 요청하고,
                 받아온 이미지들을 DOM에 동적으로 추가/교체하는 방식이었습니다.
               </p>
-              <p class="text-slate-600 mb-4">
+              <p class="text-muted-foreground mb-4">
                 이러한 '비동기 통신'과 '동적 DOM 조작'의 조합은 정적인 HTML
                 문서가 사용자와 실시간으로 상호작용하는
                 <strong>'웹 애플리케이션'으로 진화하는 결정적인 계기</strong>가
@@ -698,10 +934,10 @@ $('#load-data').on('click', function() {
 
           <!-- Section: SPA Era -->
           <section id="spa-era" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               📱 SPA 프레임워크 시대: React, Vue, Angular
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               jQuery 시대가 웹의 동적인 가능성을 열어주었다면, SPA(Single Page
               Application) 프레임워크의 등장은 현대적인 웹 애플리케이션의 시대를
               본격적으로 열었습니다. 사용자는 더 이상 새로운 정보를 볼 때마다
@@ -712,21 +948,21 @@ $('#load-data').on('click', function() {
               Vue라는 세 거인이 있습니다.
             </p>
 
-            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+            <div class="card mb-8">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 초기 SPA 프레임워크의 등장 (2008 ~ 2012)
               </h3>
               <div
-                class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg"
+                class="flex items-start space-x-4 p-4 border border-gray-200 rounded-md"
               >
                 <span class="text-4xl">
                   <img src="images/angular.png" alt="Angular" width="200px" />
                 </span>
                 <div>
-                  <h4 class="font-bold text-lg text-slate-800">
+                  <h4 class="font-bold text-lg text-foreground">
                     AngularJS (2010)
                   </h4>
-                  <p class="text-slate-600">
+                  <p class="text-muted-foreground">
                     구글에서 개발한 AngularJS는 '프레임워크'라는 이름에 걸맞게
                     웹 애플리케이션 개발에 필요한 거의 모든 기능(라우팅, 데이터
                     관리, 템플릿 등)을 갖춘 'All-in-one' 솔루션이었습니다. 특히
@@ -743,7 +979,7 @@ $('#load-data').on('click', function() {
               <p class="mt-4 text-slate-700 font-semibold">
                 기술적 흐름: 클라이언트 렌더링의 본격화
               </p>
-              <p class="text-slate-600 mt-2">
+              <p class="text-muted-foreground mt-2">
                 AngularJS의 등장은 웹 개발의 패러다임을 바꾸는 신호탄이었습니다.
                 과거 서버가 담당했던 HTML 생성, 페이지 구성, 상태 관리 등의
                 역할이 대거 브라우저(클라이언트)로 넘어오기 시작했습니다. 이로
@@ -753,19 +989,19 @@ $('#load-data').on('click', function() {
               </p>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+            <div class="card mb-8">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 SPA의 대중화와 React, Vue의 등판 (2013 ~ 2016)
               </h3>
               <div
-                class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg mb-4"
+                class="flex items-start space-x-4 p-4 border border-gray-200 rounded-md mb-4"
               >
                 <span class="text-4xl">
                   <img src="images/react.png" alt="react" width="92px" />
                 </span>
                 <div>
-                  <h4 class="font-bold text-lg text-slate-800">React (2013)</h4>
-                  <p class="text-slate-600">
+                  <h4 class="font-bold text-lg text-foreground">React (2013)</h4>
+                  <p class="text-muted-foreground">
                     페이스북이 발표. '프레임워크'가 아닌 'View 라이브러리'임을
                     표방하며, 필요한 부분에만 적용할 수 있는 유연성을
                     제공했습니다.
@@ -795,16 +1031,16 @@ $('#load-data').on('click', function() {
                 </div>
               </div>
               <div
-                class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg mb-4"
+                class="flex items-start space-x-4 p-4 border border-gray-200 rounded-md mb-4"
               >
                 <span class="text-4xl">
                   <img src="images/vue.png" alt="vue" width="92px" />
                 </span>
                 <div>
-                  <h4 class="font-bold text-lg text-slate-800">
+                  <h4 class="font-bold text-lg text-foreground">
                     Vue.js (2014)
                   </h4>
-                  <p class="text-slate-600">
+                  <p class="text-muted-foreground">
                     구글에서 AngularJS 프로젝트에 참여했던 개발자 에반 유(Evan
                     You)가 발표한 Vue.js는 "두 거인의 장점을 흡수하고 단점을
                     개선하면 어떨까?"라는 생각에서 출발했습니다. 그는
@@ -826,7 +1062,7 @@ $('#load-data').on('click', function() {
                 <span class="text-2xl">🔄</span>
                 <div>
                   <p class="font-semibold">상태 관리</p>
-                  <p class="text-xs text-slate-500">Redux, MobX</p>
+                  <p class="text-xs text-muted-foreground">Redux, MobX</p>
                 </div>
               </div>
               <div
@@ -835,7 +1071,7 @@ $('#load-data').on('click', function() {
                 <span class="text-2xl">🧭</span>
                 <div>
                   <p class="font-semibold">클라이언트 라우팅</p>
-                  <p class="text-xs text-slate-500">React Router</p>
+                  <p class="text-xs text-muted-foreground">React Router</p>
                 </div>
               </div>
               <div
@@ -844,11 +1080,11 @@ $('#load-data').on('click', function() {
                 <span class="text-2xl">📦</span>
                 <div>
                   <p class="font-semibold">빌드 시스템</p>
-                  <p class="text-xs text-slate-500">Webpack, Babel</p>
+                  <p class="text-xs text-muted-foreground">Webpack, Babel</p>
                 </div>
               </div>
             </div>
-            <p class="text-slate-600 mt-4">
+            <p class="text-muted-foreground mt-4">
               React의 등장과 함께, 복잡해진 애플리케이션의 상태를 효율적으로
               관리하기 위한 상태 관리 라이브러리, 페이지 이동을 처리하는 라우팅
               라이브러리, 최신 JavaScript 문법 사용과 코드 번들링을 위한 빌드
@@ -856,7 +1092,7 @@ $('#load-data').on('click', function() {
             </p>
 
             <p
-              class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
+              class="mt-6 p-4 bg-teal-50 rounded-md border border-teal-200 text-slate-700"
             >
               <strong class="text-teal-700"
                 >백엔드 개발자에게 주는 시사점:</strong
@@ -869,11 +1105,11 @@ $('#load-data').on('click', function() {
               촉발하는 중요한 계기가 됩니다.
             </p>
 
-            <div class="bg-white p-6 rounded-lg shadow-sm mb-8 mt-12">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+            <div class="card p-6 rounded-md  mb-8 mt-12">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 SPA의 핵심 동작 원리: 어떻게 한 페이지로 동작할까?
               </h3>
-              <p class="text-slate-600 mb-4">
+              <p class="text-muted-foreground mb-4">
                 SPA는 이름처럼 단 하나의 HTML 페이지로 시작합니다. 그렇다면
                 어떻게 다른 내용을 보여줄 수 있을까요? 그 비밀은 JavaScript에
                 있습니다. 전체 과정을 간단한 코드로 살펴보겠습니다.
@@ -883,7 +1119,7 @@ $('#load-data').on('click', function() {
                 <h4 class="font-semibold text-lg text-slate-700 mb-2">
                   1. 최초 요청: 서버는 뼈대만 보낸다
                 </h4>
-                <p class="text-slate-600 mb-2">
+                <p class="text-muted-foreground mb-2">
                   사용자가 사이트에 처음 접속하면, 서버는 내용이 비어있는
                   <strong>`index.html`</strong> 파일 하나와, 애플리케이션의 모든
                   로직이 담긴 <strong>JavaScript 파일(`app.js`)</strong>을
@@ -910,7 +1146,7 @@ $('#load-data').on('click', function() {
                 <h4 class="font-semibold text-lg text-slate-700 mb-2">
                   2. 브라우저: JavaScript가 모든 것을 그린다
                 </h4>
-                <p class="text-slate-600 mb-2">
+                <p class="text-muted-foreground mb-2">
                   브라우저는 `index.html`과 `app.js`를 받은 후, `app.js`를
                   실행합니다. 이 스크립트는 비어있던 `&lt;div id="root"&gt;`를
                   찾아 초기 화면(예: 홈페이지)을 그려 넣습니다. 그리고
@@ -966,7 +1202,7 @@ render(window.location.pathname);
                 <h4 class="font-semibold text-lg text-slate-700 mb-2">
                   정리: SPA의 동작 흐름
                 </h4>
-                <ol class="list-decimal list-inside text-slate-600 space-y-2">
+                <ol class="list-decimal list-inside text-muted-foreground space-y-2">
                   <li>
                     <strong>최초 로드:</strong> 브라우저는 서버로부터 뼈대
                     `index.html`과 두뇌 `app.js`를 받습니다.
@@ -987,7 +1223,7 @@ render(window.location.pathname);
                     업데이트합니다.
                   </li>
                 </ol>
-                <p class="text-slate-600 mt-4">
+                <p class="text-muted-foreground mt-4">
                   이처럼 SPA는 최초에 한 번만 페이지 전체를 받고, 이후에는
                   JavaScript가 서버와는 데이터로만 통신하며 화면을 동적으로 계속
                   바꿔나가는 방식입니다. React, Vue, Angular와 같은 프레임워크는
@@ -1003,10 +1239,10 @@ render(window.location.pathname);
 
           <!-- Section: Trend 1 -->
           <section id="trend1" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               트렌드 1: 메타 프레임워크의 시대
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               SPA의 단점을 극복하고 더 나은 성능과 개발 경험을 제공하기 위해,
               기존 프레임워크(React 등)를 기반으로 한 '메타 프레임워크'가
               등장했습니다.
@@ -1014,19 +1250,19 @@ render(window.location.pathname);
 
             <!-- Sub-Section: React 기반 메타 프레임워크 전성시대 -->
             <div id="trend1-meta">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 React 기반 메타 프레임워크 전성시대
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 React는 여전히 강력한 생태계를 가지고 있으며, 이를 기반으로 한
                 메타 프레임워크들이 프론트엔드 개발의 표준이 되고 있습니다.
                 이들은 개발 편의성과 성능 최적화를 동시에 제공합니다.
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div
-                  class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
+                  class="card p-6 rounded-md  flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">
+                  <span class="text-4xl text-primary">
                     <img
                       class="rounded-full"
                       src="images/nextjs.jpeg"
@@ -1034,10 +1270,10 @@ render(window.location.pathname);
                     />
                   </span>
                   <div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-800">
+                    <h4 class="text-xl font-bold mb-2 text-foreground">
                       Next.js
                     </h4>
-                    <p class="text-slate-600">
+                    <p class="text-muted-foreground">
                       React 기반의 가장 인기 있는 풀스택 프레임워크. SSR, SSG,
                       ISR 등 다양한 렌더링 방식을 지원하며 파일 시스템 기반
                       라우팅을 제공합니다. 복잡한 웹 애플리케이션 및 마케팅
@@ -1046,9 +1282,9 @@ render(window.location.pathname);
                   </div>
                 </div>
                 <div
-                  class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
+                  class="card p-6 rounded-md  flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">
+                  <span class="text-4xl text-primary">
                     <img
                       src="images/remix.png"
                       alt="remix"
@@ -1056,8 +1292,8 @@ render(window.location.pathname);
                     />
                   </span>
                   <div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-800">Remix</h4>
-                    <p class="text-slate-600">
+                    <h4 class="text-xl font-bold mb-2 text-foreground">Remix</h4>
+                    <p class="text-muted-foreground">
                       웹 표준을 지향하며, 서버에서 데이터를 로드하고 폼 제출을
                       처리하는 등 웹의 기본 기능을 활용하여 개발을 간소화합니다.
                       특히 데이터 로딩 및 뮤테이션(데이터 변경)에 강력한 기능을
@@ -1066,9 +1302,9 @@ render(window.location.pathname);
                   </div>
                 </div>
                 <div
-                  class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
+                  class="card p-6 rounded-md  flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">
+                  <span class="text-4xl text-primary">
                     <img
                       src="images/astro.jpg"
                       alt="astro"
@@ -1077,8 +1313,8 @@ render(window.location.pathname);
                     />
                   </span>
                   <div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-800">Astro</h4>
-                    <p class="text-slate-600">
+                    <h4 class="text-xl font-bold mb-2 text-foreground">Astro</h4>
+                    <p class="text-muted-foreground">
                       HTML 중심의 정적 사이트 생성을 목표로 하며, 필요한
                       부분에만 JavaScript를 사용하는 "Islands Architecture"를
                       통해 매우 빠른 초기 로딩 성능을 제공합니다. 블로그, 마케팅
@@ -1088,9 +1324,9 @@ render(window.location.pathname);
                   </div>
                 </div>
                 <div
-                  class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4"
+                  class="card p-6 rounded-md  flex items-start space-x-4"
                 >
-                  <span class="text-4xl text-teal-600">
+                  <span class="text-4xl text-primary">
                     <img
                       src="images/gatsby.png"
                       alt="gatsby"
@@ -1098,10 +1334,10 @@ render(window.location.pathname);
                     />
                   </span>
                   <div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-800">
+                    <h4 class="text-xl font-bold mb-2 text-foreground">
                       Gatsby
                     </h4>
-                    <p class="text-slate-600">
+                    <p class="text-muted-foreground">
                       React 기반의 강력한 정적 사이트 생성기(SSG)입니다.
                       GraphQL을 활용한 통합 데이터 레이어를 통해 CMS, Markdown,
                       API 등 다양한 소스에서 데이터를 쉽게 가져와 빌드 시점에
@@ -1114,16 +1350,16 @@ render(window.location.pathname);
             </div>
             <!-- Sub-Section: Trend 1 - Server/Client Components -->
             <div id="trend1-server-client">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 App Router 도입과 Server Components 개념 (Next.js 중심)
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 Next.js 13부터 도입된 App Router와 Server Components는
                 프론트엔드 개발 패러다임에 큰 변화를 가져왔습니다. 이는
                 컴포넌트가 어디서 실행되고 데이터를 어떻게 가져오는지에 대한
                 근본적인 변화를 의미합니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="card p-6 rounded-md ">
                 <div class="flex flex-col space-y-4">
                   <div class="border border-blue-200 bg-blue-50 p-4 rounded-md">
                     <h4 class="font-bold text-blue-800">
@@ -1183,10 +1419,10 @@ render(window.location.pathname);
             </div>
             <!-- Sub-Section: Trend 1 - Rendering Optimization -->
             <div id="trend1-optimization">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 렌더링 최적화의 진화: Hydration을 넘어 서버 컴포넌트로
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 서버에서 렌더링된 정적 HTML에 어떻게 생명을 불어넣어
                 인터랙티브하게 만들 것인가? 이 질문에 대한 해답은
                 'Hydration'에서 시작하여, 이제는 '어떤 컴포넌트의 JavaScript를
@@ -1194,12 +1430,12 @@ render(window.location.pathname);
                 있습니다. 이 과정의 핵심 목표는 초기 JavaScript 실행 비용을
                 최소화하여 사용자 경험을 극대화하는 것입니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm space-y-6">
+              <div class="card p-6 rounded-md  space-y-6">
                 <div>
-                  <h4 class="text-lg font-bold text-slate-800">
+                  <h4 class="text-lg font-bold text-foreground">
                     1단계: Full Hydration (전체 수화)
                   </h4>
-                  <p class="text-slate-600 mt-2">
+                  <p class="text-muted-foreground mt-2">
                     서버는 브라우저에 완성된 형태의 HTML을 보냅니다. 사용자는
                     즉시 콘텐츠를 볼 수 있지만(빠른 FCP), 이 HTML은 아직
                     '그림'에 불과합니다. 상호작용을 위해서는 클라이언트에서 전체
@@ -1215,11 +1451,11 @@ render(window.location.pathname);
                     됩니다.
                   </p>
                 </div>
-                <div class="border-t pt-6 border-slate-200">
-                  <h4 class="text-lg font-bold text-slate-800">
+                <div class="border-t pt-6 border-border">
+                  <h4 class="text-lg font-bold text-foreground">
                     2단계: Partial Hydration (부분적 수화)
                   </h4>
-                  <p class="text-slate-600 mt-2">
+                  <p class="text-muted-foreground mt-2">
                     "페이지 전체가 인터랙티브할 필요는 없다"는 아이디어에서
                     출발합니다. 페이지의 대부분은 정적인 텍스트와 이미지이고,
                     실제 상호작용이 필요한 부분은 댓글창, 이미지 캐러셀 등
@@ -1232,13 +1468,13 @@ render(window.location.pathname);
                     크게 줄여 TTI를 개선합니다.
                   </p>
                 </div>
-                <div class="border-t pt-6 border-slate-200">
-                  <h4 class="text-lg font-bold text-slate-800">
+                <div class="border-t pt-6 border-border">
+                  <h4 class="text-lg font-bold text-foreground">
                     3단계: Islands Architecture (섬 아키텍처)
                   </h4>
-                  <p class="text-slate-600 mt-2">
+                  <p class="text-muted-foreground mt-2">
                     Partial Hydration을 더욱 발전시킨 개념으로,
-                    <strong class="text-teal-600">Astro</strong>
+                    <strong class="text-primary">Astro</strong>
                     프레임워크가 이를 적극적으로 채용했습니다. 페이지를 '정적인
                     HTML의 바다(Sea of Static HTML)'로 간주하고, 상호작용이
                     필요한 컴포넌트들을 '독립적인 섬(Island)'으로 취급합니다. 각
@@ -1253,19 +1489,19 @@ render(window.location.pathname);
                     웹사이트(블로그, 마케팅 페이지 등)에 매우 효과적입니다.
                   </p>
                 </div>
-                <div class="border-t pt-6 border-slate-200">
-                  <h4 class="text-lg font-bold text-slate-800">
+                <div class="border-t pt-6 border-border">
+                  <h4 class="text-lg font-bold text-foreground">
                     4단계: 서버 컴포넌트 (Server Components)
                   </h4>
-                  <p class="text-slate-600 mt-2">
+                  <p class="text-muted-foreground mt-2">
                     "애초에 상호작용이 필요 없는 컴포넌트의 JavaScript는 왜
                     클라이언트로 보내야 하는가?"라는 근본적인 질문에서
                     출발합니다.
-                    <strong class="text-teal-600">React(Next.js)</strong>가
+                    <strong class="text-primary">React(Next.js)</strong>가
                     주도하는 이 패러다임은 컴포넌트를 두 종류로 나눕니다.
                   </p>
                   <ul
-                    class="list-disc list-inside text-slate-600 mt-2 space-y-1"
+                    class="list-disc list-inside text-muted-foreground mt-2 space-y-1"
                   >
                     <li>
                       <strong>서버 컴포넌트:</strong> 서버에서만 렌더링되고, 그
@@ -1290,15 +1526,15 @@ render(window.location.pathname);
                     <img
                       src="images/sql_injection_sc.webp"
                       alt="sql_injection_sc"
-                      class="border border-slate-200 rounded-lg"
+                      class="border border-border rounded-md"
                     />
-                    <span class="text-sm text-slate-500 mt-2"
+                    <span class="text-sm text-muted-foreground mt-2"
                       >뇌절의 SQL 인젝션</span
                     >
                   </div>
                 </div>
                 <p
-                  class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
+                  class="mt-6 p-4 bg-teal-50 rounded-md border border-teal-200 text-slate-700"
                 >
                   <strong class="text-teal-700"
                     >백엔드 개발자에게 주는 시사점:</strong
@@ -1318,58 +1554,58 @@ render(window.location.pathname);
 
           <!-- Section: Trend 2 -->
           <section id="trend2" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               트렌드 2: DX(개발자 경험) 중심의 툴링 생태계
             </h2>
-            <p class="text-slate-600 mb-8">
-              프론트엔드 개발의 복잡성 증가함에 따라, 개발자의 생산성과 만족도를
-              높이는 개발자 경험(DX)이 중요해졌습니다. 빌드, 테스트, 코드 작성
-              등 개발 전 과정에서 혁신적인 도구들이 등장하고 있습니다. 상세
-              내용은 하위 메뉴를 통해 확인해주세요.
+            <p class="text-muted-foreground mb-8">
+              프론트엔드 개발의 복잡성이 증가함에 따라, 개발자의 생산성과
+              만족도를 높이는 개발자 경험(DX)이 중요해졌습니다. 과거의 불편함을
+              해결하고 개발 효율을 극대화하는 혁신적인 도구들이 등장하며
+              생태계를 바꾸고 있습니다.
             </p>
 
             <!-- Sub-Section: Trend 2 - Build Tools -->
             <div id="trend2-build">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
-                🚀 빌드 도구의 진화
+              <h3 class="text-xl font-bold mb-4 text-foreground">
+                🚀 빌드 도구의 진화: 기다림과의 싸움
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 더 빠른 빌드 속도는 개발 생산성 향상과 직결되며, 이는 백엔드
                 개발자가 프론트엔드 빌드/배포를 기다리는 시간을 줄여 협업 효율을
                 높이는 데도 기여합니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="card p-6 rounded-md ">
                 <div
                   class="flex items-center justify-center space-x-4 mb-4 text-slate-700 font-semibold text-center"
                 >
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">🐢</span>
                     <p class="text-sm">Webpack</p>
-                    <p class="text-xs text-slate-500">느린 빌드</p>
+                    <p class="text-xs text-muted-foreground">느린 빌드</p>
                   </div>
-                  <span class="text-2xl text-slate-500">→</span>
+                  <span class="text-2xl text-muted-foreground">→</span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">🐇</span>
                     <p class="text-sm">Vite</p>
-                    <p class="text-xs text-slate-500">빠른 개발 서버</p>
+                    <p class="text-xs text-muted-foreground">빠른 개발 서버</p>
                   </div>
-                  <span class="text-2xl text-slate-500">→</span>
+                  <span class="text-2xl text-muted-foreground">→</span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">🚀</span>
                     <p class="text-sm">Turbopack</p>
-                    <p class="text-xs text-slate-500">초고속 번들링</p>
+                    <p class="text-xs text-muted-foreground">초고속 번들링</p>
                   </div>
                 </div>
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
-                    <strong class="text-teal-600">Vite:</strong> ES 모듈(ESM)
+                    <strong class="text-primary">Vite:</strong> ES 모듈(ESM)
                     기반의 개발 서버를 사용하여 웹팩(Webpack)보다 훨씬 빠르게
                     개발 서버를 시작하고 HMR(Hot Module Replacement)을
                     제공합니다. 개발 시 즉각적인 피드백을 제공하여 생산성을
                     높입니다.
                   </li>
                   <li>
-                    <strong class="text-teal-600">Turbopack:</strong> Next.js의
+                    <strong class="text-primary">Turbopack:</strong> Next.js의
                     새로운 Rust 기반 번들러로, Webpack보다 최대 700배, Vite보다
                     10배 빠른 빌드 속도를 목표로 합니다. 대규모 프로젝트에서
                     빌드 시간을 획기적으로 단축하여 개발자의 대기 시간을
@@ -1381,32 +1617,32 @@ render(window.location.pathname);
 
             <!-- Sub-Section: Trend 2 - Test Ecosystem -->
             <div id="trend2-test">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 🧪 프론트엔드 테스트 생태계
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 안정적인 애플리케이션은 백엔드 시스템의 부하를 줄이고, 예상치
                 못한 프론트엔드 오류로 인한 사용자 불만을 최소화합니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+              <div class="card p-6 rounded-md ">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
                     <span class="text-lg mr-2">✅</span
-                    ><strong class="text-teal-600">Vitest:</strong> Vite 기반의
+                    ><strong class="text-primary">Vitest:</strong> Vite 기반의
                     빠른 유닛/통합 테스트 프레임워크입니다. Jest와 유사한 API를
                     제공하여 기존 Jest 사용자들도 쉽게 전환할 수 있습니다.
                     컴포넌트의 작은 단위 로직을 빠르게 검증합니다.
                   </li>
                   <li>
                     <span class="text-lg mr-2">📚</span
-                    ><strong class="text-teal-600">Storybook:</strong> UI
+                    ><strong class="text-primary">Storybook:</strong> UI
                     컴포넌트를 독립적으로 개발하고 문서화하며 테스트할 수 있는
                     환경을 제공합니다. 디자이너, QA, 다른 개발자와의 협업을 통해
                     컴포넌트의 일관성과 재사용성을 높입니다.
                   </li>
                   <li>
                     <span class="text-lg mr-2">🤖</span
-                    ><strong class="text-teal-600">Playwright:</strong> 웹
+                    ><strong class="text-primary">Playwright:</strong> 웹
                     애플리케이션의 엔드-투-엔드(E2E) 테스트를 위한 강력한
                     도구입니다. 실제 브라우저 환경에서 사용자 시나리오를
                     자동화하여 테스트하며, 브라우저 호환성 및 사용자 흐름의
@@ -1418,30 +1654,30 @@ render(window.location.pathname);
 
             <!-- Sub-Section: Trend 2 - AI Tools -->
             <div id="trend2-ai">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 🤖 코드 제너레이션 도구 / AI 보조 도구
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 AI 도구는 개발자의 반복적인 작업을 줄여 더 창의적이고 복잡한
                 문제 해결에 집중할 수 있도록 돕습니다. 이는 백엔드 개발자와의
                 협업 시에도 더 고도화된 논의를 가능하게 합니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="card p-6 rounded-md ">
                 <div
                   class="flex items-center justify-center space-x-4 mb-4 text-slate-700 font-semibold text-center"
                 >
                   <span class="text-5xl">✨</span>
                   <p class="text-lg">AI가 코드를 돕는다!</p>
                 </div>
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
-                    <strong class="text-teal-600">코드 제너레이션 도구:</strong>
+                    <strong class="text-primary">코드 제너레이션 도구:</strong>
                     Next.js CLI와 같은 도구는 라우트, 컴포넌트, API 엔드포인트
                     등의 보일러플레이트 코드를 자동으로 생성하여 개발자가 핵심
                     로직에 집중할 수 있도록 돕습니다.
                   </li>
                   <li>
-                    <strong class="text-teal-600"
+                    <strong class="text-primary"
                       >AI 보조 도구 (Copilot, Claude, AI 디자인툴 연동):</strong
                     >
                     <ul class="list-circle list-inside ml-4 text-sm">
@@ -1470,10 +1706,10 @@ render(window.location.pathname);
 
           <!-- Section: Trend 3 -->
           <section id="trend3" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               트렌드 3: UI/UX와 상태 관리의 패러다임 변화
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               애플리케이션의 상태 관리 패러다임이 '클라이언트' 중심에서 '서버'
               상태 중심으로 이동하고 있습니다. 이는 백엔드 API에서 받아온
               데이터를 프론트엔드에서 어떻게 다룰지에 대한 근본적인 변화를
@@ -1482,22 +1718,22 @@ render(window.location.pathname);
 
             <!-- Sub-Section: Trend 3 - State Paradigm -->
             <div id="trend3-state-paradigm">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 상태 관리 패러다임의 변화
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 과거에는 클라이언트에서 모든 상태를 관리했지만, 이제는 서버
                 상태의 중요성이 부각되고 클라이언트 상태를 최소화하는 방향으로
                 진화하고 있습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+              <div class="card p-6 rounded-md  mb-6">
                 <div class="chart-container">
                   <canvas id="stateManagementChart"></canvas>
                 </div>
-                <p class="text-center mt-2 text-sm text-slate-500">
+                <p class="text-center mt-2 text-sm text-muted-foreground">
                   서버 상태 관리의 중요성이 점점 커지고 있습니다.
                 </p>
-                <p class="mt-4 text-slate-600">
+                <p class="mt-4 text-muted-foreground">
                   과거에는 Redux, MobX처럼 클라이언트에서 모든 애플리케이션
                   상태(UI 상태, 데이터 상태 등)를 통합 관리하는 방식이 주를
                   이뤘습니다. 하지만 서버에서 가져온 데이터(서버 상태)는
@@ -1514,36 +1750,36 @@ render(window.location.pathname);
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">📦</span>
                     <p class="text-sm">클라이언트 상태</p>
-                    <p class="text-xs text-slate-500">Redux, MobX</p>
+                    <p class="text-xs text-muted-foreground">Redux, MobX</p>
                   </div>
-                  <span class="text-2xl text-slate-500">→</span>
+                  <span class="text-2xl text-muted-foreground">→</span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">☁️</span>
                     <p class="text-sm">서버 상태</p>
-                    <p class="text-xs text-slate-500">TanStack Query</p>
+                    <p class="text-xs text-muted-foreground">TanStack Query</p>
                   </div>
-                  <span class="text-2xl text-slate-500">→</span>
+                  <span class="text-2xl text-muted-foreground">→</span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">💡</span>
                     <p class="text-sm">상태 최소화</p>
-                    <p class="text-xs text-slate-500">Server Components</p>
+                    <p class="text-xs text-muted-foreground">Server Components</p>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Sub-Section: Trend 3 - State Libraries -->
             <div id="trend3-state-libs">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 주요 상태 관리 라이브러리
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 다양한 상태 관리 라이브러리들이 각자의 강점을 가지고 프론트엔드
                 개발에 활용되고 있습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+              <div class="card p-6 rounded-md ">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
-                    <strong class="text-teal-600"
+                    <strong class="text-primary"
                       >TanStack Query (React Query):</strong
                     >
                     서버 상태 관리에 특화된 라이브러리로, 데이터 페칭, 캐싱,
@@ -1552,7 +1788,7 @@ render(window.location.pathname);
                     경험을 향상시킵니다.
                   </li>
                   <li>
-                    <strong class="text-teal-600"
+                    <strong class="text-primary"
                       >Zustand / Jotai / Recoil:</strong
                     >
                     가볍고 유연한 클라이언트 상태 관리 라이브러리로, 전역 상태
@@ -1560,7 +1796,7 @@ render(window.location.pathname);
                     클라이언트에서만 필요한 상태 관리에 주로 사용됩니다.
                   </li>
                   <li>
-                    <strong class="text-teal-600"
+                    <strong class="text-primary"
                       >Signal (Preact, SolidJS, Vue):</strong
                     >
                     세밀한 반응성(fine-grained reactivity)을 제공하여 상태 변경
@@ -1573,14 +1809,14 @@ render(window.location.pathname);
             </div>
             <!-- Sub-Section: Trend 3 - Designer Collaboration -->
             <div id="trend3-design-collab">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 Tailwind + UI kit(shadcn-ui, Radix 등) → 디자이너와 협업 강화
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 디자인과 개발의 간극을 줄여 일관된 UI/UX를 제공하고,
                 디자이너와의 협업을 강화하는 도구들이 주목받고 있습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="card p-6 rounded-md ">
                 <div
                   class="flex items-center justify-center space-x-4 mb-4 text-slate-700 font-semibold text-center"
                 >
@@ -1588,22 +1824,22 @@ render(window.location.pathname);
                     <span class="text-4xl">🎨</span>
                     <p class="text-sm">디자인</p>
                   </div>
-                  <span class="text-2xl text-slate-500">↔️</span>
+                  <span class="text-2xl text-muted-foreground">↔️</span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">💻</span>
                     <p class="text-sm">개발</p>
                   </div>
                 </div>
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
-                    <strong class="text-teal-600">Tailwind CSS:</strong>
+                    <strong class="text-primary">Tailwind CSS:</strong>
                     유틸리티 우선(utility-first) CSS 프레임워크로, 미리 정의된
                     클래스들을 조합하여 스타일을 빠르게 적용할 수 있습니다. CSS
                     작성 시간을 줄이고 일관된 디자인을 유지하는 데 도움을
                     줍니다.
                   </li>
                   <li>
-                    <strong class="text-teal-600"
+                    <strong class="text-primary"
                       >UI Kit (shadcn/ui, Radix UI):</strong
                     >
                     <ul class="list-circle list-inside ml-4 text-sm">
@@ -1623,7 +1859,7 @@ render(window.location.pathname);
                     </ul>
                   </li>
                 </ul>
-                <p class="mt-4 text-sm text-slate-500">
+                <p class="mt-4 text-sm text-muted-foreground">
                   이러한 도구들은 디자인 시스템 구축을 용이하게 하고, 디자이너가
                   정의한 디자인 토큰과 컴포넌트를 개발자가 일관성 있게 구현할 수
                   있도록 도와 디자이너와의 협업을 강화합니다. 이는 백엔드
@@ -1636,10 +1872,10 @@ render(window.location.pathname);
 
           <!-- Section: Trend 4 -->
           <section id="trend4" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               트렌드 4: 프론트엔드의 풀스택화
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               이제 프론트엔드는 클라이언트 코드뿐만 아니라 백엔드와의 효율적인
               연동을 위한 새로운 접근 방식이 등장하고 있습니다. 메타
               프레임워크가 제공하는 API Routes, Server Actions 등은 프론트엔드와
@@ -1649,17 +1885,17 @@ render(window.location.pathname);
 
             <!-- Sub-Section: Trend 4 - Fullstack Tech -->
             <div id="trend4-fullstack-tech">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 프론트엔드 풀스택 기술
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 프론트엔드 개발자가 클라이언트 요구사항에 최적화된 데이터 처리
                 및 백엔드 연동을 효율적으로 수행할 수 있게 하는 기술들이
                 등장하고 있습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+              <div class="card p-6 rounded-md  mb-6">
                 <div
-                  class="grid grid-cols-1 md:grid-cols-3 gap-4 text-slate-600 mb-6"
+                  class="grid grid-cols-1 md:grid-cols-3 gap-4 text-muted-foreground mb-6"
                 >
                   <div class="border border-gray-200 p-4 rounded-md">
                     <h4 class="font-bold text-lg text-teal-700">
@@ -1710,27 +1946,27 @@ render(window.location.pathname);
                     <span class="text-4xl">🌐</span>
                     <p class="text-sm">클라이언트</p>
                   </div>
-                  <span class="text-2xl text-slate-500 diagram-arrow"></span>
+                  <span class="text-2xl text-muted-foreground diagram-arrow"></span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">⚡️</span>
                     <p class="text-sm">Edge Function</p>
-                    <p class="text-xs text-slate-500">(빠른 응답)</p>
+                    <p class="text-xs text-muted-foreground">(빠른 응답)</p>
                   </div>
-                  <span class="text-2xl text-slate-500 diagram-arrow"></span>
+                  <span class="text-2xl text-muted-foreground diagram-arrow"></span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">🖥️</span>
                     <p class="text-sm">FE 서버</p>
-                    <p class="text-xs text-slate-500">(SSR, API Routes)</p>
+                    <p class="text-xs text-muted-foreground">(SSR, API Routes)</p>
                   </div>
-                  <span class="text-2xl text-slate-500 diagram-arrow"></span>
+                  <span class="text-2xl text-muted-foreground diagram-arrow"></span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">☁️</span>
                     <p class="text-sm">BE 서버</p>
-                    <p class="text-xs text-slate-500">(핵심 로직)</p>
+                    <p class="text-xs text-muted-foreground">(핵심 로직)</p>
                   </div>
                 </div>
                 <p
-                  class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
+                  class="mt-6 p-4 bg-teal-50 rounded-md border border-teal-200 text-slate-700"
                 >
                   <strong class="text-teal-700"
                     >백엔드 개발자에게 주는 시사점:</strong
@@ -1748,16 +1984,16 @@ render(window.location.pathname);
             </div>
             <!-- Sub-Section: Trend 4 - Cloud Integration -->
             <div id="trend4-cloud-integration">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 클라우드와 프론트엔드의 통합
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 Vercel, Netlify, Cloudflare와 같은 플랫폼들은 프론트엔드
                 애플리케이션의 배포, 호스팅, CDN, 서버리스 함수(Edge Functions
                 포함) 등을 통합하여 제공합니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+              <div class="card p-6 rounded-md ">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
                     <strong>Vercel:</strong> Next.js 개발사에서 제공하는
                     플랫폼으로, Next.js 애플리케이션 배포에 최적화되어 있습니다.
@@ -1788,10 +2024,10 @@ render(window.location.pathname);
 
           <!-- Section: Trend 5 -->
           <section id="trend5" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               트렌드 5: 프론트엔드 개발자의 역할 확장
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               현대의 프론트엔드 개발자는 단순히 UI를 구현하는 것을 넘어, 제품의
               성공에 직접적으로 기여하는 다양한 역할을 수행합니다. 이는 제품의
               품질과 직결되며, 백엔드 개발자와의 협업 범위를 넓힙니다.
@@ -1799,10 +2035,10 @@ render(window.location.pathname);
 
             <!-- Sub-Section: Trend 5 - Roles Detail -->
             <div id="trend5-roles-detail">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 프론트엔드 개발자의 역할 확장 상세
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 프론트엔드 개발자의 역할은 단순히 UI를 구현하는 것을 넘어,
                 제품의 성공에 직접적으로 기여하는 다양한 영역으로 확장되고
                 있습니다.
@@ -1811,22 +2047,22 @@ render(window.location.pathname);
                 class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center"
               >
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">🎨</span>
                   <p class="font-bold">UX (User Experience)</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     사용자 흐름, 인터랙션 디자인, 사용성 테스트 등 사용자 경험
                     전반에 대한 이해와 개선 노력이 중요합니다. 백엔드 API 설계
                     시 사용자 시나리오를 함께 고려해야 합니다.
                   </p>
                 </div>
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">⚡️</span>
                   <p class="font-bold">퍼포먼스 (Performance)</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     웹 페이지 로딩 속도, 렌더링 성능, 번들 사이즈 최적화 등 성능
                     지표 개선을 위한 깊은 지식이 요구됩니다. 백엔드 API의 응답
                     속도와 데이터 용량은 프론트엔드 성능에 직접적인 영향을
@@ -1834,11 +2070,11 @@ render(window.location.pathname);
                   </p>
                 </div>
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">🔍</span>
                   <p class="font-bold">SEO (Search Engine Optimization)</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     검색 엔진 최적화를 위한 SSR/SSG 구현, 메타 태그 관리, 시맨틱
                     HTML 작성 등 백엔드와 협업하여 SEO를 고려해야 합니다. 특히
                     동적으로 변하는 콘텐츠의 SEO를 위해 백엔드와 프론트엔드의
@@ -1846,22 +2082,22 @@ render(window.location.pathname);
                   </p>
                 </div>
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">🛡️</span>
                   <p class="font-bold">보안 (Security)</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     XSS, CSRF 등 웹 취약점에 대한 이해와 방어, 안전한 데이터
                     통신 구현 등 보안에 대한 책임이 커지고 있습니다. 백엔드와
                     함께 인증/인가 흐름, 데이터 암호화 등을 설계해야 합니다.
                   </p>
                 </div>
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">♿️</span>
                   <p class="font-bold">접근성 (Accessibility)</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     모든 사용자가 웹 콘텐츠에 동등하게 접근할 수 있도록 WCAG(Web
                     Content Accessibility Guidelines)를 준수하고, 시맨틱 HTML,
                     ARIA 속성 등을 활용합니다. 이는 백엔드에서 제공하는 데이터
@@ -1869,11 +2105,11 @@ render(window.location.pathname);
                   </p>
                 </div>
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">📊</span>
                   <p class="font-bold">모니터링 (Monitoring)</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     웹 성능, 에러 로깅, 사용자 행동 분석 등 프론트엔드
                     애플리케이션의 상태를 모니터링하고 개선하는 역할도
                     중요해지고 있습니다. 백엔드 로그 및 지표와 연동하여 전체
@@ -1881,22 +2117,22 @@ render(window.location.pathname);
                   </p>
                 </div>
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">📈</span>
                   <p class="font-bold">데이터 시각화</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     D3.js, Chart.js 등 라이브러리를 활용하여 복잡한 데이터를
                     직관적인 형태로 시각화하는 능력이 요구됩니다. 백엔드에서
                     시각화에 최적화된 형태로 데이터를 제공하는 것이 중요합니다.
                   </p>
                 </div>
                 <div
-                  class="bg-white p-4 rounded-lg shadow-sm aspect-square flex flex-col justify-center items-center"
+                  class="card p-4 rounded-md  aspect-square flex flex-col justify-center items-center"
                 >
                   <span class="text-4xl mb-2">🤖</span>
                   <p class="font-bold">AI UI 구현</p>
-                  <p class="text-xs text-slate-500">
+                  <p class="text-xs text-muted-foreground">
                     AI 모델과의 연동을 통해 실시간으로 데이터를 처리하고, AI가
                     생성한 콘텐츠를 사용자에게 보여주는 UI를 구현하는 역할도
                     늘어나고 있습니다. AI API와의 효율적인 통신 및 응답 처리
@@ -1908,10 +2144,10 @@ render(window.location.pathname);
           </section>
           <!-- Section: Collaboration -->
           <section id="collaboration" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               백엔드 개발자를 위한 협업 가이드
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               프론트엔드 기술의 발전은 백엔드와의 협업 방식에 직접적인 영향을
               줍니다. 최신 협업 패턴을 이해하고 적용하면 개발 생산성과 안정성을
               크게 향상시킬 수 있습니다.
@@ -1919,15 +2155,15 @@ render(window.location.pathname);
 
             <!-- Sub-Section: Collaboration - Overview -->
             <div id="collaboration-overview">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 백엔드 협업 가이드: 협업 개요
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 프론트엔드 기술의 발전은 백엔드와의 협업 방식에 직접적인 영향을
                 줍니다. 최신 협업 패턴을 이해하고 적용하면 개발 생산성과
                 안정성을 크게 향상시킬 수 있습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm text-center mb-6">
+              <div class="card p-6 rounded-md  text-center mb-6">
                 <p class="text-2xl font-bold text-teal-700 mb-2">
                   "더 나은 제품을 위한 FE-BE 시너지"
                 </p>
@@ -1940,17 +2176,17 @@ render(window.location.pathname);
 
             <!-- Sub-Section: Collaboration 1 -->
             <div id="collaboration1">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 백엔드 협업 가이드: 1. API 명세와 타입 공유
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 API 스펙을 정의하고 공유하는 방식이 진화하고 있습니다. 타입
                 안전성(Type Safety)은 이제 선택이 아닌 필수입니다. 이는 백엔드와
                 프론트엔드 간의 불필요한 소통 비용을 줄이고 개발 초기 단계에서
                 오류를 방지하는 데 핵심적인 역할을 합니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <div class="card p-6 rounded-md ">
+                <h3 class="text-xl font-bold mb-4 text-foreground">
                   API 명세 및 타입 공유 흐름
                 </h3>
                 <div
@@ -1959,30 +2195,30 @@ render(window.location.pathname);
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">📝</span>
                     <p class="text-sm">OpenAPI/Swagger</p>
-                    <p class="text-xs text-slate-500">(API 명세)</p>
+                    <p class="text-xs text-muted-foreground">(API 명세)</p>
                   </div>
-                  <span class="text-2xl text-slate-500 diagram-arrow"></span>
+                  <span class="text-2xl text-muted-foreground diagram-arrow"></span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">🛡️</span>
                     <p class="text-sm">zod</p>
-                    <p class="text-xs text-slate-500">(스키마 검증)</p>
+                    <p class="text-xs text-muted-foreground">(스키마 검증)</p>
                   </div>
-                  <span class="text-2xl text-slate-500 diagram-arrow"></span>
+                  <span class="text-2xl text-muted-foreground diagram-arrow"></span>
                   <div class="flex flex-col items-center">
                     <span class="text-4xl">🔗</span>
                     <p class="text-sm">tRPC / ts-rest</p>
-                    <p class="text-xs text-slate-500">(타입 안전 통신)</p>
+                    <p class="text-xs text-muted-foreground">(타입 안전 통신)</p>
                   </div>
                 </div>
-                <ul class="list-disc list-inside text-slate-600 space-y-2">
+                <ul class="list-disc list-inside text-muted-foreground space-y-2">
                   <li>
-                    <strong class="text-teal-600">OpenAPI/Swagger:</strong>
+                    <strong class="text-primary">OpenAPI/Swagger:</strong>
                     여전히 강력한 API 명세 도구이지만, 프론트엔드 개발 과정에서
                     API 스펙의 변경이 자주 발생할 수 있습니다. 명세의 최신화가
                     중요합니다.
                   </li>
                   <li>
-                    <strong class="text-teal-600"
+                    <strong class="text-primary"
                       >zod 등 프론트 기반 검증:</strong
                     >
                     프론트엔드에서 `zod`와 같은 스키마 유효성 검사 라이브러리를
@@ -1992,7 +2228,7 @@ render(window.location.pathname);
                     됩니다.
                   </li>
                   <li>
-                    <strong class="text-teal-600">ts-rest / tRPC:</strong>
+                    <strong class="text-primary">ts-rest / tRPC:</strong>
                     <ul class="list-circle list-inside ml-4 text-sm">
                       <li>
                         <strong>ts-rest:</strong> REST API를 위한 타입 안전한
@@ -2010,7 +2246,7 @@ render(window.location.pathname);
                   </li>
                 </ul>
                 <p
-                  class="mt-4 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
+                  class="mt-4 p-4 bg-teal-50 rounded-md border border-teal-200 text-slate-700"
                 >
                   <strong class="text-teal-700">협업 제안:</strong> 백엔드에서
                   API 데이터의 요청 및 응답 타입을 TypeScript
@@ -2023,99 +2259,99 @@ render(window.location.pathname);
             </div>
             <!-- Sub-Section: Collaboration 2 -->
             <div id="collaboration2">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 백엔드 협업 가이드: 2. BE ↔ FE 통신 구조의 모던화 및 렌더링
                 방식 이해
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 프론트엔드가 페이지를 어떻게 그리는지(CSR vs SSR) 이해하면, 더
                 효율적인 API를 설계하고 데이터 페칭 전략을 최적화할 수 있습니다.
                 GraphQL과 React Suspense for Data Fetching과 같은 기술은 데이터
                 통신 방식을 혁신하고 있습니다.
               </p>
-              <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
-                <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <div class="card p-6 rounded-md  mb-6">
+                <h3 class="text-xl font-bold mb-4 text-foreground">
                   CSR vs SSR: 렌더링 방식 비교
                 </h3>
                 <div class="flex justify-center mb-4">
                   <button
                     id="toggleRendering"
-                    class="px-6 py-2 rounded-full bg-teal-600 text-white font-semibold shadow-md hover:bg-teal-700 transition"
+                    class="px-6 py-2 rounded-full btn btn-primary text-white font-semibold shadow-md hover:bg-teal-700 transition"
                   >
                     CSR / SSR 전환
                   </button>
                 </div>
                 <div
                   id="csr-diagram"
-                  class="border border-blue-200 bg-blue-50 p-4 rounded-md text-slate-600"
+                  class="border border-blue-200 bg-blue-50 p-4 rounded-md text-muted-foreground"
                 >
                   <h4 class="font-bold text-lg text-blue-800 mb-2">
                     CSR (Client Side Rendering) 흐름 🌐
                   </h4>
                   <div class="flex flex-col items-center space-y-2">
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <div class="w-full card p-2 rounded-md ">
                       브라우저: 빈 HTML + JS 파일 요청
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       서버: 빈 HTML, JS 파일 전송
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       브라우저: JS 실행 후 데이터 요청 (API 호출)
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       백엔드: JSON 데이터 응답
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       브라우저: 데이터 수신 후 화면 렌더링
                     </div>
                   </div>
-                  <p class="text-xs mt-4 text-slate-500">
+                  <p class="text-xs mt-4 text-muted-foreground">
                     <strong>특징:</strong> 초기 로딩 후 빠른 인터랙션, SEO 불리,
                     백엔드는 주로 JSON 데이터 제공.
                   </p>
                 </div>
                 <div
                   id="ssr-diagram"
-                  class="border border-green-200 bg-green-50 p-4 rounded-md text-slate-600 hidden"
+                  class="border border-green-200 bg-green-50 p-4 rounded-md text-muted-foreground hidden"
                 >
                   <h4 class="font-bold text-lg text-green-800 mb-2">
                     SSR (Server Side Rendering) 흐름 🖥️
                   </h4>
                   <div class="flex flex-col items-center space-y-2">
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <div class="w-full card p-2 rounded-md ">
                       브라우저: 페이지 요청
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       프론트엔드 서버: 백엔드 API 호출 (데이터 요청)
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       백엔드: 데이터 응답
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       프론트엔드 서버: 데이터 채워진 완성 HTML 생성
                     </div>
-                    <span class="text-2xl text-slate-500">⬇️</span>
-                    <div class="w-full bg-white p-2 rounded-md shadow-sm">
+                    <span class="text-2xl text-muted-foreground">⬇️</span>
+                    <div class="w-full card p-2 rounded-md ">
                       프론트엔드 서버: 완성 HTML 브라우저 전송
                     </div>
                   </div>
-                  <p class="text-xs mt-4 text-slate-500">
+                  <p class="text-xs mt-4 text-muted-foreground">
                     <strong>특징:</strong> 초기 로딩 빠름, SEO 유리, 서버 부하
                     증가, 백엔드는 초기 렌더링에 필요한 데이터 제공.
                   </p>
                 </div>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                  <h3 class="font-bold text-xl mb-3 text-slate-800">GraphQL</h3>
-                  <p class="text-slate-600">
+                <div class="card p-6 rounded-md ">
+                  <h3 class="font-bold text-xl mb-3 text-foreground">GraphQL</h3>
+                  <p class="text-muted-foreground">
                     클라이언트가 필요한 데이터를 정확히 요청할 수 있게 하여
                     오버페칭(Over-fetching: 필요 없는 데이터까지 가져오는
                     것)이나 언더페칭(Under-fetching: 필요한 데이터를 여러 번
@@ -2125,11 +2361,11 @@ render(window.location.pathname);
                     효율성을 개선합니다.
                   </p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                  <h3 class="font-bold text-xl mb-3 text-slate-800">
+                <div class="card p-6 rounded-md ">
+                  <h3 class="font-bold text-xl mb-3 text-foreground">
                     Suspense for Data Fetching (React)
                   </h3>
-                  <p class="text-slate-600">
+                  <p class="text-muted-foreground">
                     React 18에서 도입된 기능으로, 데이터 페칭이 완료될 때까지
                     UI를 렌더링하지 않고 로딩 상태를 보여줄 수 있게 합니다. 이는
                     사용자 경험을 개선하고, 데이터 의존성 관리를 용이하게
@@ -2140,7 +2376,7 @@ render(window.location.pathname);
                 </div>
               </div>
               <p
-                class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
+                class="mt-6 p-4 bg-teal-50 rounded-md border border-teal-200 text-slate-700"
               >
                 <strong class="text-teal-700">협업 제안:</strong> 기존 REST API
                 외에 GraphQL 도입을 고려하거나, Suspense와 같은 최신 프론트엔드
@@ -2152,61 +2388,61 @@ render(window.location.pathname);
             </div>
             <!-- Sub-Section: Collaboration 3 -->
             <div id="collaboration3">
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
+              <h3 class="text-xl font-bold mb-4 text-foreground">
                 백엔드 협업 가이드: 3. 프론트엔드 성능 최적화 기법 이해
               </h3>
-              <p class="text-slate-600 mb-8">
+              <p class="text-muted-foreground mb-8">
                 프론트엔드의 성능 최적화 기법들은 백엔드 API 설계 및 인프라
                 전략과 밀접하게 연결되어 있습니다. 백엔드 개발자분들이 이러한
                 개념을 이해하면 더욱 효율적인 시스템 아키텍처를 구축할 수
                 있습니다.
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                  <h3 class="font-bold text-xl mb-3 text-slate-800">
+                <div class="card p-6 rounded-md ">
+                  <h3 class="font-bold text-xl mb-3 text-foreground">
                     코드스플리팅 (Code Splitting)
                   </h3>
                   <div
                     class="flex items-center justify-center space-x-4 mb-4 text-slate-700 font-semibold text-center"
                   >
                     <span class="text-4xl">📦</span>
-                    <span class="text-2xl text-slate-500">→</span>
+                    <span class="text-2xl text-muted-foreground">→</span>
                     <span class="text-4xl">✂️</span>
-                    <span class="text-2xl text-slate-500">→</span>
+                    <span class="text-2xl text-muted-foreground">→</span>
                     <span class="text-4xl">🧩</span>
                   </div>
-                  <p class="text-slate-600">
+                  <p class="text-muted-foreground">
                     애플리케이션의 JavaScript 코드를 여러 개의 작은 번들로
                     나누어 필요한 시점에만 로드하는 기법입니다. 초기 로딩 속도
                     개선에 필수적입니다. 사용자가 특정 기능이나 페이지에 진입할
                     때만 해당 코드 번들을 로드하여 전체 애플리케이션의 초기 로딩
                     부담을 줄입니다.
                   </p>
-                  <p class="mt-2 text-sm text-slate-500">
+                  <p class="mt-2 text-sm text-muted-foreground">
                     <strong>백엔드 연관:</strong> 백엔드에서 제공하는 API
                     엔드포인트가 코드 스플리팅된 모듈에 따라 최적화될 수
                     있습니다. 예를 들어, 특정 기능에 필요한 데이터만 해당 코드
                     번들이 로드될 때 API를 호출하도록 설계할 수 있습니다.
                   </p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                  <h3 class="font-bold text-xl mb-3 text-slate-800">
+                <div class="card p-6 rounded-md ">
+                  <h3 class="font-bold text-xl mb-3 text-foreground">
                     캐싱 (Caching)
                   </h3>
                   <div
                     class="flex items-center justify-center space-x-4 mb-4 text-slate-700 font-semibold text-center"
                   >
                     <span class="text-4xl">💾</span>
-                    <span class="text-2xl text-slate-500">↔️</span>
+                    <span class="text-2xl text-muted-foreground">↔️</span>
                     <span class="text-4xl">🚀</span>
                   </div>
-                  <p class="text-slate-600">
+                  <p class="text-muted-foreground">
                     브라우저 캐시, CDN 캐시, 서버 캐시 등 다양한 레벨에서
                     데이터를 캐싱하여 성능을 최적화합니다. 자주 변경되지 않는
                     데이터를 캐시하여 불필요한 네트워크 요청을 줄이고 응답
                     시간을 단축합니다.
                   </p>
-                  <p class="mt-2 text-sm text-slate-500">
+                  <p class="mt-2 text-sm text-muted-foreground">
                     <strong>백엔드 연관:</strong> 백엔드 API의 캐싱
                     헤더(Cache-Control, ETag, Last-Modified 등) 설정은
                     프론트엔드 캐싱 전략에 직접적인 영향을 미칩니다. 백엔드에서
@@ -2216,7 +2452,7 @@ render(window.location.pathname);
                 </div>
               </div>
               <p
-                class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200 text-slate-700"
+                class="mt-6 p-4 bg-teal-50 rounded-md border border-teal-200 text-slate-700"
               >
                 <strong class="text-teal-700">협업 제안:</strong> 백엔드
                 개발자분들이 이러한 프론트엔드 최적화 기법들을 이해하고 있다면,
@@ -2230,16 +2466,16 @@ render(window.location.pathname);
 
           <!-- Section: Conclusion -->
           <section id="conclusion" class="content-section pb-8">
-            <h2 class="text-3xl font-bold mb-4 text-slate-900">
+            <h2 class="text-3xl font-bold mb-4 text-foreground">
               결론 - 프론트엔드, 함께 만드는 시대
             </h2>
-            <p class="text-slate-600 mb-8">
+            <p class="text-muted-foreground mb-8">
               이제 프론트엔드는 단순히 백엔드 API를 소비하는 역할에 머무르지
               않습니다. 자체적인 비즈니스 로직 처리, 데이터 관리, 서버리스 기능
               활용까지 백엔드 영역과의 경계가 허물어지면서, 제품 개발의 핵심적인
               축으로 자리 잡았습니다.
             </p>
-            <div class="bg-white p-8 rounded-lg shadow-sm text-center">
+            <div class="card p-8 rounded-md  text-center">
               <p class="text-2xl font-bold text-teal-700 mb-4">
                 "프론트엔드는 더 이상 화면이 아닌,<br />백엔드의 가장 중요한
                 '전략적 파트너'입니다."
