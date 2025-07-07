@@ -589,6 +589,63 @@
             <h2 class="text-3xl font-bold mb-4 text-slate-900">
               🗺️ jQuery와 웹 애플리케이션의 태동
             </h2>
+
+            <h3 class="text-xl font-bold mb-4 text-slate-800 mt-12">
+              jQuery: AJAX와 DOM 조작의 간소화
+            </h3>
+            <p class="text-slate-600 mb-4">
+              이러한 AJAX 기반의 동적 UI 구현을 매우 쉽게 만들어준 라이브러리가
+              바로
+              <strong
+                ><a
+                  class="text-blue-500 underline"
+                  href="https://jquery.com"
+                  target="_blank"
+                  >jQuery</a
+                ></strong
+              >입니다. 짧고 직관적인 코드로 AJAX 통신과 DOM 조작을 가능하게 하여
+              폭발적인 인기를 끌었습니다.
+            </p>
+            <div
+              class="mt-4 bg-slate-800 text-slate-200 rounded-lg p-4 text-sm font-mono overflow-x-auto"
+            >
+              <pre><code><span class="text-gray-400">// HTML: &lt;button id="load-data"&gt;데이터 로드&lt;/button&gt;&lt;div id="results"&gt;&lt;/div&gt;</span>
+<span class="text-green-400">// 버튼 클릭 시, 페이지 새로고침 없이 서버에서 데이터를 비동기로 가져옵니다.</span>
+$('#load-data').on('click', function() {
+  $.ajax({
+    url: '/api/items', <span class="text-gray-400">// 백엔드 API 엔드포인트</span>
+    success: function(data) { <span class="text-gray-400">// 통신 성공 시</span>
+      <span class="text-green-400">// 기존 내용을 비우고,</span>
+      $('#results').empty();
+      
+      <span class="text-green-400">// 받은 데이터로 새로운 HTML 요소를 만들어 DOM에 직접 추가합니다.</span>
+      $.each(data, function(index, item) {
+        $('#results').append('&lt;div class="item"&gt;' + item.name + '&lt;/div&gt;');
+      });
+    }
+  });
+});</code></pre>
+            </div>
+            <p class="text-slate-600 mt-4">
+              특히 당시 시장 점유율이 높았던 Internet Explorer의 비표준 구현에도
+              잘 대응하여, 수많은 기업 웹사이트와 포털, 정부 시스템까지도
+              jQuery를 채택하게 되었습니다.
+            </p>
+            <div class="flex justify-center">
+              <img
+                src="/images/cross_browsing.jpg"
+                class="border border-slate-200 rounded-lg"
+                width="520px"
+              />
+            </div>
+            <p class="text-slate-600 mt-4">
+              그 결과, jQuery는 곧 웹 프론트엔드의
+              <strong>사실상 표준 라이브러리</strong>로 자리잡게 되었고, 이후의
+              웹 개발 생태계에도 큰 영향을 미쳤습니다.
+            </p>
+            <h3 class="text-xl font-bold mb-4 text-slate-800 mt-12">
+              새로고침 없는 지도: 웹 애플리케이션의 시작
+            </h3>
             <p class="text-slate-600 mb-8">
               2005년 구글맵의 등장은 웹 개발 패러다임에 큰 충격을 주었습니다.
               페이지 전체를 새로고침하지 않고도 지도를 부드럽게 이동하고,
@@ -598,13 +655,20 @@
             </p>
             <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
               <img
-                src="images/google_map.jpg"
+                src="images/google_map2.gif"
                 alt="초기 구글맵 UI"
                 class="w-full h-auto rounded-lg mb-6 shadow-md"
               />
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
-                새로고침 없는 지도: 웹 애플리케이션의 시작
-              </h3>
+              <div class="text-center mb-8">
+                더 많은 정보를 얻고 싶다면
+                <a
+                  class="text-blue-600 hover:underline"
+                  target="_blank"
+                  href="https://medium.com/google-design/google-maps-cb0326d165f5"
+                  >미디움</a
+                >
+                클릭
+              </div>
               <p class="text-slate-600 mb-4">
                 구글맵은 Canvas나 WebGL 같은 현대 그래픽 기술이 아닌,
                 <strong
@@ -623,36 +687,6 @@
                 <strong>SPA(Single Page Application) 시대의 명백한 전조</strong
                 >였습니다.
               </p>
-              <h3 class="text-xl font-bold mb-4 text-slate-800">
-                jQuery: AJAX와 DOM 조작의 간소화
-              </h3>
-              <p class="text-slate-600 mb-4">
-                이러한 AJAX 기반의 동적 UI 구현을 매우 쉽게 만들어준
-                라이브러리가 바로 <strong>jQuery</strong>입니다. 복잡한 브라우저
-                호환성 문제를 해결해주고, 짧고 직관적인 코드로 AJAX 통신과 DOM
-                조작을 가능하게 하여 폭발적인 인기를 끌었습니다.
-              </p>
-              <div
-                class="mt-4 bg-slate-800 text-slate-200 rounded-lg p-4 text-sm font-mono overflow-x-auto"
-              >
-                <pre><code><span class="text-gray-400">// HTML: &lt;button id="load-data"&gt;데이터 로드&lt;/button&gt;&lt;div id="results"&gt;&lt;/div&gt;</span>
-
-<span class="text-green-400">// 버튼 클릭 시, 페이지 새로고침 없이 서버에서 데이터를 비동기로 가져옵니다.</span>
-$('#load-data').on('click', function() {
-  $.ajax({
-    url: '/api/items', <span class="text-gray-400">// 백엔드 API 엔드포인트</span>
-    success: function(data) { <span class="text-gray-400">// 통신 성공 시</span>
-      <span class="text-green-400">// 기존 내용을 비우고,</span>
-      $('#results').empty();
-      
-      <span class="text-green-400">// 받은 데이터로 새로운 HTML 요소를 만들어 DOM에 직접 추가합니다.</span>
-      $.each(data, function(index, item) {
-        $('#results').append('&lt;div class="item"&gt;' + item.name + '&lt;/div&gt;');
-      });
-    }
-  });
-});</code></pre>
-              </div>
             </div>
           </section>
 
@@ -2019,64 +2053,69 @@ $('#load-data').on('click', function() {
           }
 
           // Try to find the target element first
-          const targetElement = document.getElementById(targetHash.substring(1));
-          
+          const targetElement = document.getElementById(
+            targetHash.substring(1)
+          );
+
           if (targetElement) {
             // Check if target is a main section (.content-section)
             if (targetElement.classList.contains('content-section')) {
               // Hide all sections first
-              const allContentSections = document.querySelectorAll('.content-section');
+              const allContentSections =
+                document.querySelectorAll('.content-section');
               allContentSections.forEach(section => {
                 section.classList.remove('active', 'fade-in');
               });
-              
+
               // Show the target section
               targetElement.classList.add('active', 'fade-in');
-              
+
               // Scroll to top for main sections
               setTimeout(() => {
                 // Find the main content area and scroll it to top
-                const mainContent = document.querySelector('main.flex-1.overflow-y-auto');
+                const mainContent = document.querySelector(
+                  'main.flex-1.overflow-y-auto'
+                );
                 if (mainContent) {
                   mainContent.scrollTo({
                     top: 0,
-                    behavior: 'smooth'
+                    behavior: 'smooth',
                   });
                 } else {
                   // Fallback to window scroll
                   window.scrollTo({
                     top: 0,
-                    behavior: 'smooth'
+                    behavior: 'smooth',
                   });
                 }
               }, 100);
-              
             } else {
               // It's a subsection - find its parent section and show it
               const parentSection = targetElement.closest('.content-section');
               if (parentSection) {
                 // Hide all sections first
-                const allContentSections = document.querySelectorAll('.content-section');
+                const allContentSections =
+                  document.querySelectorAll('.content-section');
                 allContentSections.forEach(section => {
                   section.classList.remove('active', 'fade-in');
                 });
-                
+
                 // Show the parent section
                 parentSection.classList.add('active', 'fade-in');
-                
+
                 // Wait for the parent section to be rendered, then scroll to subsection
                 setTimeout(() => {
                   // Use scrollIntoView for subsections as fallback
                   targetElement.scrollIntoView({
                     behavior: 'smooth',
-                    block: 'start'
+                    block: 'start',
                   });
-                  
+
                   // Then adjust with offset
                   setTimeout(() => {
                     window.scrollBy({
                       top: -20,
-                      behavior: 'smooth'
+                      behavior: 'smooth',
                     });
                   }, 300);
                 }, 200);
@@ -2086,7 +2125,10 @@ $('#load-data').on('click', function() {
 
           // Chart rendering logic - check if we need to render charts
           setTimeout(() => {
-            if (targetHash === '#trend3-state-paradigm' || targetHash === '#trend3') {
+            if (
+              targetHash === '#trend3-state-paradigm' ||
+              targetHash === '#trend3'
+            ) {
               renderStateManagementChart();
             } else {
               if (stateChart) {
